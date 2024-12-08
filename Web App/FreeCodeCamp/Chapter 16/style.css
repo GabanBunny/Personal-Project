@@ -1,0 +1,90 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+/* Begin reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+img {
+  display: block;
+}
+/* End reset */
+/* Utility classes */
+.nowrap {
+  white-space: nowrap;
+}
+.offscreen {
+  position: absolute;
+  left: -1000000px;
+}
+/* End Utility classes */
+
+body {
+  font-family: "Nunito", sans-serif;
+  min-height: 100vh;
+  background-color: aliceblue;
+  background-image: url("https://png.pngtree.com/element_our/20190522/ourmid/pngtree-transparent-bubble-image_1070455.jpg"),
+    linear-gradient(to left, steelblue, purple);
+  background-repeat: repeat-y, no-repeat;
+  background-position: right;
+  background-size: 20%, auto;
+}
+.container {
+  background-color: #fbd29c;
+  background-image: url("img/2024-lamborghini-revuelto-exterior.jpg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position-x: right;
+}
+.hero {
+  border-bottom: 2px solid black;
+  padding: 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 30px;
+  background-color: hsl(0, 0%, 70%, 0.403);
+}
+.h1 {
+  font-size: 500%;
+  color: aliceblue;
+
+  text-shadow: 2px 2px 5px black;
+
+  /* background-color: hsl(0, 0%,0%, 0.403);
+  padding: 0.25rem;
+  border-radius: 10px; */
+}
+.profile-pic-figure {
+  width: 35%;
+}
+.profile-pic-figure img {
+  width: 100%;
+  height: auto;
+  border: 5px dashed gray;
+  border-radius: 50%;
+}
+.example {
+  margin-top: 1rem;
+  padding-left: 20px;
+  border: 1px solid red;
+  display: flex;
+  align-items: center;
+  align-content: flex-start;
+  justify-content: space-between;
+}
+.example img {
+  width: 25%;
+  height: auto;
+  margin-left: auto;
+}
+.clip {
+  font-weight: 800;
+  font-size: 18rem;
+  background-image: url("img/2024-lamborghini-revuelto-exterior.jpg");
+  background-position: top;
+  text-align: bottom;
+  text-transform: uppercase;
+  -webkit-background-clip: text;
+  color: hsla(0, 0%, 0%, 0.261);
+}

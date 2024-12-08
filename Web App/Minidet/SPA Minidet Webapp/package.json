@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@tanstack/react-table": "^8.20.5",
+    "chartjs-plugin-datalabels": "^2.2.0",
+    "yarn": "^1.22.22"
+  },
+  "scripts": {
+    "start": "react-scripts start"
+  }
+}

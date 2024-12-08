@@ -1,0 +1,59 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-size: 1.5rem;
+  font-family: "Roboto", sans-serif;
+  min-height: 200vh;
+}
+/* how to make things disappear */
+html{
+    scroll-behavior: smooth;
+}
+section {
+  height: 100vh;
+}
+.blue {
+  background-color: blue;
+}
+.red {
+  background-color: red;
+}
+.green {
+  background-color: green;
+}
+header,
+footer {
+  color: white;
+  text-align: center;
+  height: 100px;
+}
+header {
+  position: sticky;
+  top: 0;
+  font-size: 5rem;
+
+}
+footer {
+  background-color: black;
+  position: Sticky;
+  width:100%;
+  bottom: 0;
+  font-size: 3rem;
+}
+a.visited{
+    color:white;
+}
+.social{
+    background-color: royalblue;
+    color:white;
+    font-size: inherit;
+    padding: 1rem;
+    position: fixed;
+    top:30%;
+    left:0;
+    z-index:1;
+}
