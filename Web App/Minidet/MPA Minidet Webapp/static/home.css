@@ -1,0 +1,13 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+#loginContainer {
+  margin: 50px;
+  height: 100vh;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

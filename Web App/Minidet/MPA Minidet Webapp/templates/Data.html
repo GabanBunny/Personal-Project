@@ -1,0 +1,59 @@
+{% extends "Base.html" %} {% block head %} {{ super() }}
+<!-- Call the load table function -->
+<link rel="stylesheet" href="{{ url_for('static', filename='data.css') }}" />
+<script src="{{url_for('static', filename='data.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-streaming@2.0.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+
+{% endblock %} {% block content %}
+<div class="wrap">
+  <div class="content">
+    <div id="chartContainer">
+      <canvas id="lineChart"></canvas>
+      <canvas id="pieChart"></canvas>
+      <canvas id= "AnomalyNumbers"><p>Number anomalies</p><canvas>
+      </div>
+
+    <!-- Table -->
+    <table border="1" id="tableContainer">
+      <thead>
+        <tr>
+          <th>Source IP</th>
+          <th>Source Port</th>
+          <th>Target IP</th>
+          <th>Target Port</th>
+          <th>Protocol</th>
+          <th>Input Bytes</th>
+          <th>Output Bytes</th>
+          <th>Anomaly</th>
+          <th>Attack_id</th>
+          <th>Attack_name</th>
+          <th>Timestamp</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <!-- Previous and Next page -->
+    <div id="pagination">
+      <span id="numberOfRows"
+        >Rows per page:
+        <select
+          name="rowsPerPage"
+          id="rowsPerPage"
+          onchange="updateRowsPerPage()"
+        >
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+      </span>
+      <button id="prevBtn" onclick="loadPreviousPage()">Previous</button>
+      <span id="pageIndicator">Page 1</span>
+      <button id="nextBtn" onclick="loadNextPage()">Next</button>
+    </div>
+  </div>
+</div>
+{% endblock %}

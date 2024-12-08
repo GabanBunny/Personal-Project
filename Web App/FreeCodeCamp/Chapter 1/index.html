@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Animal Photo app title</title>
+  </head>
+  <body>
+    <!-- header -->
+    <h2>Animal photo app</h2>
+    <main>
+      <!-- Cat photos -->
+      <!-- header -->
+      <h3>Cat photos</h3>
+      <!-- paragraph -->
+      <p>
+        Click here to view more
+        <!-- anker tab -->
+        <a href="https://catphotos.com" target="_blank">cat photos</a>
+      </p>
+      <img
+        src="https://image.petmd.com/files/styles/978x550/public/2023-05/calm.cat_.jpg"
+        width="500"
+        ,height="500"
+        alt="A cute orange cat lying on its back"
+      />
+
+      <h3>Cat Lists</h3>
+      <!-- div like in CSS -->
+      <div class="Lists">
+        <p>Things cats <strong>love</strong></p>
+        <!-- un ordered list  -->
+        <ul>
+          <li>
+            <a
+              href="https://catphotos.com"
+              target="_blank"
+              alt="Delicious cat nip"
+              >cat nip</a
+            >
+          </li>
+          <li>
+            <a href="https://catphotos.com" target="_blank">laser pointer</a>
+          </li>
+          <li><a href="https://catphotos.com" target="_blank">lasagna</a></li>
+        </ul>
+        <p>Things cats <strong>hate</strong></p>
+        <!-- un ordered list  -->
+        <ol>
+          <li>flea treat ments</li>
+          <li>thunder</li>
+          <li>other cats</li>
+        </ol>
+      </div>
+      <!-- form -->
+      <!-- TODO Create website to handle form submittion -->
+      <form action="/submit-cat-photo">
+        <!-- label so that we circle can be clicked when clicked on text indoor -->
+        <label for="indoor"
+          ><input id="indoor" type="radio" name="indoor-outdoor" checked />
+          indoor</label
+        ><br />
+        <label for="outdoor">
+          <input id="outdoor" type="radio" name="indoor-outdoor" />
+          outdoor</label
+        ><br />
+        <label for="loving"
+          ><input
+            id="loving"
+            type="checkbox"
+            name="personality"
+            checked
+          />loving</label
+        ><br />
+        <label for="lazy"
+          ><input id="lazy" type="checkbox" name="personality" />lazy</label
+        ><br />
+        <label for="Energetic"
+          ><input
+            id="Energetic"
+            type="checkbox"
+            name="personality"
+          />Energetic</label
+        ><br />
+
+        <input type="text" placeholder="cat photo URL" required /><br />
+        <button type="submit">Submit</button>
+      </form>
+
+      <!-- Dog photos -->
+      <!-- header -->
+      <h3>Dog photos</h3>
+      <!-- paragraph -->
+      <p>
+        Click here to view more cat photos
+        <!-- anker tab -->
+        <a href="https://www.facebook.com/khueanh159" target="_blank">
+          dog photos</a
+        >
+      </p>
+      <img
+        src="https://d.newsweek.com/en/full/1845133/dog-relaxing-cucumbers-eyes.jpg"
+        width="500"
+        ,height="500"
+        alt="A cute brown dog"
+      />
+    </main>
+
+    <!-- footer -->
+    <footer>
+      <p>
+        <small>
+          No Copyright -
+          <a href="https://www.facebook.com/ngo.tuong.142/ ," target="_blank"
+            >Ngo Phuc Tuong</a
+          >
+        </small>
+      </p>
+    </footer>
+  </body>
+</html>

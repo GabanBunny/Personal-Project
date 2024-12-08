@@ -1,0 +1,66 @@
+.wrap {
+  padding-top: calc(var(--header-height)/2);
+  padding-left: 20px;
+}
+#chartContainer {
+  width: 250px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#lineChart,
+#pieChart {
+  /* flex: 1; */
+  background-color: whitesmoke;
+}
+#pieChart {
+  margin-left: 20px;
+}
+#tableContainer {
+  margin-top: 20px;
+  border-collapse: collapse;
+  box-shadow: 0 5px 10px #cccccc;
+  background-color: whitesmoke;
+  overflow: hidden;
+  /* Round the table */
+  border-radius: 10px;
+
+  thead {
+    /* max-width: 10px; */
+    box-shadow: 0 5px 10px #cccccc;
+  }
+  th {
+    text-align: center;
+    padding: 0.3rem 0.4rem;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 90;
+  }
+  td {
+    padding: 0.3rem 0.4rem;
+  }
+
+  /* Wild card to find all class STARTS WITH */
+  [class^="attack_name"] {
+    padding: 0.1rem 1rem;
+    background-color: #f8d7da; /* Red background */
+    color: #721c24; /* Red text */
+  }
+  /* Attack name-Benign styling */
+  .attack_name-Benign {
+    /* border-radius: ; */
+    padding: 0.1rem 1rem;
+    background-color: #c1e2c3;
+    color: #72a877;
+  }
+}
+
+#tableContainer th,
+#tableContainer td,
+#pagination,
+#prevBtn,
+#nextBtn,
+#rowsPerPage {
+  padding: 2px 5px;
+  font-size: 12px;
+}

@@ -1,0 +1,21 @@
+{% extends "Base.html" %} {% block head %} {{ super() }}
+<!-- Call the load table function -->
+<!-- homepage load first -->
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='homepage.css') }}"
+/>
+{% endblock %} {% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}" />
+<div class="content">
+  <h1>Home</h1>
+  <p>Welcome to the homepage!</p>
+<div id="loginContainer"></div>
+</div>
+{% endblock %} {% block script %}
+<!-- Call the loading function -->
+<script src="{{url_for('static', filename='homepage.js')}}"></script>
+<script>
+  window.onload = loadLoginForm;
+</script>
+{% endblock %}
