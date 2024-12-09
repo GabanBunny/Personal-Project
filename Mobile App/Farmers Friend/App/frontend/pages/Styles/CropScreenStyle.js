@@ -10,7 +10,7 @@ export default StyleSheet.create({
     backgroundColor: "white",
   },
   container: {
-    paddingTop: 20,
+    marginTop: 20,
     flexDirection: "column",
     justifyContent: "flex-start",
     alignItems: "center",

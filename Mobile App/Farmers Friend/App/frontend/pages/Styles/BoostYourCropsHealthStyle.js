@@ -3,11 +3,12 @@ const green = "#00C853";
 
 export default StyleSheet.create({
   wrapper: {
-    marginTop: 10,
+    marginTop: 20,
     flexDirection: "column",
     height: "100%",
   },
   firstHalfContainer: {
+    marginTop: 15,
     flexDirection: "row",
     justifyContent: "space-between",
     width: "75%",
@@ -16,7 +17,12 @@ export default StyleSheet.create({
     alignItems: "center",
   },
   secondHalfContainer: {
+    marginTop: 20,
     backgroundColor: green,
-    width: "100%",
+    width: "70%",
+    height: "5%",
+    borderRadius: 15,
+    flexDirection: "column",
+    alignSelf: "center",
   },
 });

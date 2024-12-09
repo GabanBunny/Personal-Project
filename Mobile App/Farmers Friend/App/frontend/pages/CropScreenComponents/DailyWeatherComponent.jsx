@@ -2,6 +2,7 @@ import React from "react";
 import CropScreenStyle from "../Styles/CropScreenStyle";
 import { Text, View, SafeAreaView, Image } from "react-native";
 import Svg, { Path } from "react-native-svg";
+import moment from "moment";
 
 const paddingTop = 1;
 const widthIcon = 30;
@@ -38,16 +39,31 @@ const weatherIconMap = {
 };
 
 export const DailyWeatherComponent = ({ CropScreenStyle, weatherData }) => {
+  const timeIdxArr = [];
+
+  const getHour = (i) => {
+    let SydTimeZone = moment()
+      .utcOffset(11 * 60)
+      .add(i, "hours");
+
+    for (let idx = 0; idx < weatherData?.hourly?.time.length; idx++) {
+      if (
+        weatherData?.hourly?.time[idx]?.slice(11, 13) ===
+        SydTimeZone.format("HH")
+      ) {
+        timeIdxArr[i] = idx;
+      }
+    }
+    // Get index in array of hour
+    return i == 0 ? null : SydTimeZone.format("HH:mm");
+  };
   const getHourlyWeather = (i) => {
-    const weather = weatherData?.hourly?.temperature_2m[i];
+    const weather = weatherData?.hourly?.temperature_2m[timeIdxArr[i]];
     return typeof weather == "number" ? weather.toFixed(0) : "N/A";
   };
-  const getHour = (i) => {
-    const time = weatherData?.hourly?.time[i];
-    return typeof time == "string" ? time.slice(time.length - 5) : "N/A";
-  };
+
   const getWeatherIcon = (i) => {
-    const code = weatherData?.hourly?.weathercode[i];
+    const code = weatherData?.hourly?.weathercode[timeIdxArr[i]];
     const icon = weatherIconMap[code] || "01d"; // Default is clear sky
     return `https://openweathermap.org/img/wn/${icon}@2x.png` || "N/A";
   };
@@ -65,7 +81,9 @@ export const DailyWeatherComponent = ({ CropScreenStyle, weatherData }) => {
           {/* Now */}
           <View style={[CropScreenStyle.weatherInfo, { borderRightWidth: 0 }]}>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Text style={[CropScreenStyle.weatherHeader]}>Now</Text>
+              <Text style={[CropScreenStyle.weatherHeader]}>
+                Now{getHour(0)}
+              </Text>
             </View>
             <Text style={CropScreenStyle.weatherData}>
               {getHourlyWeather(0)}
