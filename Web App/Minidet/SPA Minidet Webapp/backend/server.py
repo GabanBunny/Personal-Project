@@ -7,6 +7,9 @@ import requests
 import threading
 from datetime import datetime
 import pytz
+import sqlparse
+from sqlparse.sql import Token, Identifier, IdentifierList, Where
+from sqlparse.tokens import Keyword, Wildcard, Whitespace
 
 #Start MongoDB: net start MongoDB
 #Stop MongoDB elevated term: net stop MongoDB 
@@ -27,6 +30,7 @@ mongo = PyMongo(app)
 DATA_GENERATOR_URL = "http://localhost:9090/stream-data"
 AI_DETECTOR_URL = "http://localhost:9091/detect"
 MAPPING_URL = "http://localhost:9091/mapping"
+
 #attack_mapping retrieve
 attack_mapping = requests.get(MAPPING_URL).json()
 
@@ -44,14 +48,83 @@ def serve(path):
 @app.route('/api/query', methods = ['POST'])
 def query_db():
     try:
-        db = mongo.db
-        collection = db.input
-        # Parse query from input of frontend
-        my_query = request.json
-        print(my_query)
-        ans = list(collection.find(my_query))
+       
+        # Parse query from input of frontend and remove all whitespaces
+        input_query = str(request.json).strip()
+        
+        SQLkeywordSet = {"SELECT", "UPDATE", "DELETE", "INSERT INTO", "CREATE DATABASE", "ALTER DATABASE", "ALTER TABLE", "CREATE TABLE", "DROP TABLE", "CREATE INDEX", "DROP INDEX" }
+        
+        # Parse to see if the query ? sql : mongo
+        sql_query = sqlparse.parse(input_query)
+        
+        # print(sql_query[0].tokens)
+        isSQL = False
+        for tokens in sql_query[0].tokens:
+            if(str(tokens).upper() in SQLkeywordSet):
+                isSQL = True
+        
+        next = False
+        if isSQL:
+            db = mongo.db
+            for tokens in sql_query[0].tokens:
+                # Select A
+                if isinstance(tokens,Identifier):
+                    filter_part = json.loads(str(tokens))
+
+                if isinstance(tokens,Where):
+                    print(tokens)
+                    
+                # Select A, B
+                if isinstance(tokens,IdentifierList):
+                    print(tokens)
+                    # filter_part = json.loads(str(tokens))
+                    filter_part = json.loads("{}")
+                    
+                # Select *
+                if tokens.ttype == Wildcard:
+                    if(str(tokens).upper() == "*"):
+                        filter_part = json.loads("{}")
+                
+                # From A 
+                if tokens.ttype == Keyword and next:
+                    collection = db[str(tokens)]
+                    next = False
+                
+                if tokens.ttype == Keyword:
+                    if(str(tokens).upper() == "FROM"):
+                        next = True
+            ans = list(collection.find(filter_part, {"_id": 0}))
+        else:
+            # Remove mongo.db.input.find(
+            mongoDB_query = input_query.split("(")[1]
+            
+            # Filter the collection name
+            collection_name = input_query.split("(")[0].split(".")[2]
+            
+            # Remove the last bracket )
+            mongoDB_query = mongoDB_query[:-1]
+            db = mongo.db
+            collection = db[collection_name]
+            
+            if len(mongoDB_query.split(", {")) > 1:
+                # Yes Projection
+                # 2. mongo.db.input.find({"attack_name": "Benign"}, {"_id": 0}) 
+                mongoDB_query = mongoDB_query.split(",")
+                filter_part = json.loads(mongoDB_query[0])
+                projection_part = json.loads(mongoDB_query[1])
+                ans = list(collection.find(filter_part, projection_part))
+            else :
+                # No projection
+                # 1. mongo.db.input.find({"attack_name": "Benign"}) 
+                # 3. mongo.db.input.find({"attack_name": "Benign", "protocol": 6}) 
+                mongoDB_query = json.loads(mongoDB_query)
+                ans = list(collection.find(mongoDB_query, {"_id": 0}))
+        
+        # print(ans)
         return jsonify({'query': ans}),200
-    except Exception:
+    
+    except Exception as e:
+        print(e)
         return jsonify({"error": "Error getting query"})
 
 # Anomaly Count API
@@ -66,8 +139,27 @@ def get_anomaly_count():
         return jsonify({"Error getting anomaly count"})
 
 # Data from 
-@app.route('/api/data', methods=['GET'])
+@app.route('/api/data/table', methods=['GET'])
+def get_data_forTable():
+    # Server side pagination reduce overhead and stress
+    current_page = int(request.args.get('currentPage',0))# current page number
+    page_size = int(request.args.get("pageSize", 10)) # Number of records per page
+    skip = current_page*page_size
+    db = mongo.db
+    collection = db.input
+    # Exclude id and sort time stamp
+    data = list(collection.find({}, {'_id': 0}).sort('timestamp', -1).skip(skip).limit(page_size))
+    
+    total_page = collection.count_documents({})
+    return jsonify({"data" :data,
+                    "total_page":total_page})
+
+@app.route('/api/data/chart', methods=['GET'])
 def get_data():
+    # Server side pagination reduce overhead and stress
+    current_page = int(request.args.get('currentPage',0))# current page number
+    page_size = int(request.args.get("pageSize", 10)) # Number of records per page
+    skip = current_page*page_size
     db = mongo.db
     collection = db.input
     # Exclude id and sort time stamp
@@ -104,8 +196,12 @@ def store_data_generator():
         ).distinct( 
         lambda data: ( 
         data["source_ip"][0],
+        data["source_port"][0],
         data["target_ip"][0],
+        data["target_port"][0],
         data["protocol"][0],
+        data["l7_protocol"][0],
+        data["input_bytes"][0],  
         data["output_bytes"][0],  
         data["input_packets"][0],  
         data["output_packets"][0],  
