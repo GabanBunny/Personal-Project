@@ -18,7 +18,15 @@ export const UvWindHumidityComponents = ({ CropScreenStyle, weatherData }) => {
     return weatherData?.daily?.uv_index_max?.[0] || "N/A";
   };
   return (
-    <View style={CropScreenStyle.container}>
+    <View
+      // Uv Index, Wind, Humidity Container
+      style={{
+        marginTop: 15,
+        flexDirection: "column",
+        justifyContent: "flex-start",
+        alignItems: "center",
+      }}
+    >
       <SafeAreaView>
         <View style={CropScreenStyle.weatherContainer}>
           {/*  */}

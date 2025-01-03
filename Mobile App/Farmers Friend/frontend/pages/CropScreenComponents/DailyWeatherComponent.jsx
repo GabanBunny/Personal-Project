@@ -68,7 +68,14 @@ export const DailyWeatherComponent = ({ CropScreenStyle, weatherData }) => {
   };
 
   return (
-    <View style={CropScreenStyle.container}>
+    <View
+      style={{
+        marginTop: 15,
+        flexDirection: "column",
+        justifyContent: "flex-start",
+        alignItems: "center",
+      }}
+    >
       <SafeAreaView>
         <View
           style={[

@@ -5,17 +5,6 @@ import { StyleSheet, Dimensions } from "react-native";
 const { height, width } = Dimensions.get("window");
 
 export default StyleSheet.create({
-  wrapper: {
-    flexDirection: "column",
-    width: "100%",
-  },
-
-  container: {
-    marginTop: 15,
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    alignItems: "center",
-  },
   weatherContainer: {
     width: 260,
     paddingTop: 20,

@@ -2,7 +2,6 @@ import { useNavigation } from "@react-navigation/native";
 import { StyleSheet, Text, View } from "react-native";
 
 export const CommunityScreen = () => {
-  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <Text>Community Screen</Text>

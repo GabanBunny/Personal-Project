@@ -1,19 +1,18 @@
-import React, { useEffect } from "react";
 import CropScreenStyle from "./Styles/CropScreenStyle";
 import { UvWindHumidityComponents } from "./CropScreenComponents/UvWindHumidityComponents";
 import { DailyWeatherComponent } from "./CropScreenComponents/DailyWeatherComponent";
+import { BoostYourCropsHealthComponents } from "./CropScreenComponents/BoostYourCropsHealthComponent";
+import React, { useEffect } from "react";
 import { View, Text, ScrollView, SafeAreaView } from "react-native";
-import { BoostYourCropsHealthComponents } from "./BoostYourCropsHealthComponents/BoostYourCropsHealthComponent";
-import CameraModule from "./BoostYourCropsHealthComponents/CameraModule";
 import Svg, { Path, Defs, Use, ClipPath, G } from "react-native-svg";
-
+import CameraModule from "./ChatScreenComponents/CameraModule";
 const WeatherAPI =
   "https://api.open-meteo.com/v1/forecast?latitude=-33.8678&longitude=151.2073&hourly=temperature_2m,precipitation,wind_speed_10m,relative_humidity_2m,weathercode&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max&timezone=auto";
 
 const widthIcon = 30;
 const heightIcon = 30;
 
-export const CropsScreen = () => {
+export const CropsScreen = ({ setHasCameraOpened }) => {
   const [weatherData, setWeatherData] = React.useState({});
 
   useEffect(() => {
@@ -26,19 +25,21 @@ export const CropsScreen = () => {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
-      <ScrollView style={{ flex: 1 }}>
-        <View style={CropScreenStyle.wrapper}>
+      <ScrollView style={{ paddingTop: 25, flex: 1 }}>
+        <View style={{ flexDirection: "column", width: "100%" }}>
           {/* Top Text */}
           <View
             style={{
               marginTop: 5,
               flexDirection: "row",
+              alignContent: "center",
               width: "99%",
             }}
           >
             <Text
               style={{
                 fontWeight: "bold",
+                marginTop: 10,
                 marginLeft: 20,
                 marginBottom: 10,
                 fontSize: 20,
@@ -97,9 +98,14 @@ export const CropsScreen = () => {
             CropScreenStyle={CropScreenStyle}
             weatherData={weatherData}
           />
+          {/* <BoostYourCropsHealthComponents /> */}
           <BoostYourCropsHealthComponents />
+
           <View style={CropScreenStyle.cameraContainer}>
-            <CameraModule />
+            <CameraModule
+              CropScreen={true}
+              setHasCameraOpened={setHasCameraOpened}
+            />
           </View>
         </View>
       </ScrollView>
