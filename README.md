@@ -1,5 +1,5 @@
 # Personal-Project
-Data-driven insights and analysis for real-world business challenges
+Welcome to my Personal Project repository! Here, I showcase my work in software development, blending my passion for programming, cybersecurity, data analytics, and creating innovative applications.
 
 ## 🌐 Socials:
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/www.linkedin.com/in/ tuong-ngo-phuc) 
