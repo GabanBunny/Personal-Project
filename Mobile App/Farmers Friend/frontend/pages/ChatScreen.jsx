@@ -11,28 +11,57 @@ import {
   TouchableOpacity,
   ScrollView,
   Keyboard,
+  StyleSheet,
 } from "react-native";
-import Svg, { Path, G } from "react-native-svg";
-import { useState } from "react";
+import Svg, { Path, G, Rect } from "react-native-svg";
+import { useState, useRef, useEffect } from "react";
 import { GeminiChatBot } from "./AI_Models/ChatFeature/GeminiChatBot";
+import * as FileSystem from "expo-file-system";
+import { ChatMessages } from "./ChatScreenComponents/ChatMessages";
 
 const { height, width } = Dimensions.get("window");
 const green = "#00C853";
 const fontSizeOfMessage = 14.5;
+const iconSize = 45;
 
 export const ChatScreen = ({ setHasCameraOpened }) => {
   const [isPressed, setIsPressed] = useState(false);
   const [userInput, setUserInput] = useState("");
   const [sentMessage, setSentMessage] = useState([]); //User Messages, photos, recordings
+  const [toggleChatBotSetting, setToggleChatBotSetting] = useState(false);
+  const [currentModel, setCurrentModel] = useState("Gemini 1.5 Flash");
+  const textInputRef = useRef(null);
+  const [sentMessageURI, setSentMessageURI] = useState([]); //specifically for transforming uri to base 64 before rendering
+
+  useEffect(() => {
+    const processedMessage = async () => {
+      // Promise.all takes an array of promises and waits for them to resolve
+      let updatedMessage = await Promise.all(
+        sentMessage.map(async (obj, idx) => {
+          if (idx % 2 == 0) {
+            console.log("Normal text", obj);
+            if (typeof obj === "object" && obj.hasOwnProperty("width")) {
+              base64 = await uriToBase64(obj.uri);
+              return { ...obj, uri: base64 }; // return the photo index obj
+            }
+          }
+          return obj; //return text index obj
+        })
+      );
+      setSentMessageURI(updatedMessage);
+    };
+    processedMessage();
+  }, [sentMessage]);
   return (
     <View
       style={{
-        paddingTop: 25,
+        // paddingTop: 25,
         flex: 1,
         position: "relative", //Reference point for camera modules
         alignItems: "center",
         justifyContent: "flex-end",
         backgroundColor: "#fff",
+        position: "relative",
       }}
     >
       {/* Chat content */}
@@ -43,6 +72,117 @@ export const ChatScreen = ({ setHasCameraOpened }) => {
           height: height,
         }}
       >
+        {toggleChatBotSetting ? (
+          <View
+            style={{
+              position: "absolute",
+              paddingTop: 40,
+              paddingLeft: 20,
+            }}
+          >
+            <View
+              style={{
+                width: "200",
+                backgroundColor: "white",
+                border: "solid",
+                borderWidth: 0.3,
+                borderRadius: 20,
+                zIndex: 3,
+              }}
+            >
+              <View style={{ marginLeft: 10 }}>
+                <TouchableOpacity
+                  style={styles.modelOption}
+                  onPress={() => setCurrentModel("Gemini 1.5 Flash 8B")}
+                >
+                  <Text>Gemini 1.5 Flash 8B</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  style={styles.modelOption}
+                  onPress={() => setCurrentModel("Gemini 1.5 Flash")}
+                >
+                  <Text>Gemini 1.5 Flash</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  style={styles.modelOption}
+                  onPress={() => setCurrentModel("Gemini 1.5 Pro")}
+                >
+                  <Text>Gemini 1.5 Pro</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        ) : (
+          <View></View>
+        )}
+        <View
+          style={{
+            width: "100%",
+            height: "70",
+            paddingBottom: 10,
+            border: "solid",
+            borderBottomWidth: 0.3,
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            paddingTop: 10,
+          }}
+        >
+          {/* Change Gemini Model */}
+          <TouchableOpacity
+            onPress={() => {
+              setToggleChatBotSetting(!toggleChatBotSetting);
+            }}
+          >
+            <Svg
+              xmlns="http://www.w3.org/2000/svg"
+              width={iconSize - 10}
+              height={iconSize - 10}
+              viewBox="0 0 256 256"
+            >
+              <Path
+                fill="#00C853"
+                d="M128 24a104 104 0 1 0 104 104A104.11 104.11 0 0 0 128 24m0 192a88 88 0 1 1 88-88a88.1 88.1 0 0 1-88 88m12-88a12 12 0 1 1-12-12a12 12 0 0 1 12 12m0-44a12 12 0 1 1-12-12a12 12 0 0 1 12 12m0 88a12 12 0 1 1-12-12a12 12 0 0 1 12 12"
+              />
+            </Svg>
+          </TouchableOpacity>
+
+          {/* Chatbot logo */}
+          <View
+            style={{
+              borderRadius: 20,
+              width: 50,
+              backgroundColor: green,
+              marginLeft: 90,
+              marginTop: 5,
+              marginBottom: 5,
+              alignItems: "center",
+            }}
+          >
+            <Svg
+              xmlns="http://www.w3.org/2000/svg"
+              width={iconSize}
+              height={iconSize}
+              viewBox="0 0 24 24"
+            >
+              <G
+                fill={green}
+                stroke="#fff"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+              >
+                <Path d="M12 8V4H8" />
+                <Rect width="16" height="12" x="4" y="8" rx="2" />
+                <Path d="M2 14h2m16 0h2m-7-1v2m-6-2v2" />
+              </G>
+            </Svg>
+          </View>
+          <Text style={{ width: 130 }}>{currentModel}</Text>
+        </View>
         {/* First Text */}
         <View
           style={{
@@ -71,17 +211,7 @@ export const ChatScreen = ({ setHasCameraOpened }) => {
         </View>
 
         {/*Show user message and gemini response */}
-        {sentMessage.map((text, index) => {
-          return (
-            <View key={index}>
-              {/* User Input */}
-              {index % 2 == 0 && message(text, false)}
-
-              {/* Gemini response */}
-              {index % 2 != 0 && message(text, true)}
-            </View>
-          );
-        })}
+        <ChatMessages messages={sentMessageURI} />
 
         {/* Gemini response */}
       </ScrollView>
@@ -130,7 +260,11 @@ export const ChatScreen = ({ setHasCameraOpened }) => {
               ...previousMessage,
               recording,
             ]);
-            const response = await textGemini(recording, sentMessage);
+            const response = await textGemini(
+              recording,
+              sentMessage,
+              currentModel
+            );
             // Store gemini response
             setSentMessage((previousResponse) => [
               ...previousResponse,
@@ -147,13 +281,14 @@ export const ChatScreen = ({ setHasCameraOpened }) => {
           }}
         >
           <TextInput
+            ref={textInputRef}
             style={{
               flex: 1,
               width: width - 100,
             }}
             placeholder="Type here..."
             value={userInput} //Link the value displayed to value variable
-            onChangeText={(Input) => setUserInput(Input)} // save user input
+            onChangeText={(input) => setUserInput(input)} // Directly set state// save user input
           />
         </KeyboardAvoidingView>
 
@@ -170,7 +305,11 @@ export const ChatScreen = ({ setHasCameraOpened }) => {
               setUserInput(""); //Clear content on keyboard after sent
 
               // Send Gemini
-              const response = await textGemini(userInput, sentMessage);
+              const response = await textGemini(
+                userInput,
+                sentMessage,
+                currentModel
+              );
               setSentMessage((previousResponse) => [
                 ...previousResponse,
                 response.response.text(),
@@ -195,136 +334,30 @@ export const ChatScreen = ({ setHasCameraOpened }) => {
   );
 };
 
-async function textGemini(text, sentMessage) {
+async function textGemini(text, sentMessage, model) {
   const response = await GeminiChatBot({
     result: text,
     isPlantIDv3Input: false,
     sentMessage: sentMessage, //Multi round conversation
+    selectedModel: model,
   });
   return response;
 }
 
-function message(text, gemini) {
-  //User message
-  if (typeof text === "string") {
-    return (
-      <View
-        style={{
-          marginRight: 20,
-          marginBottom: 20,
-          marginLeft: 20,
-          border: "solid",
-          borderWidth: 0.5,
-          borderRadius: 20,
-          minWidth: 10,
-          maxWidth: 250,
-          alignSelf: gemini ? "flex-start" : "flex-end",
-        }}
-      >
-        <Text
-          style={{
-            margin: 9,
-            fontSize: fontSizeOfMessage,
-          }}
-        >
-          {text}
-        </Text>
-      </View>
-    );
+async function uriToBase64(fileURI) {
+  var data;
+  try {
+    data = await FileSystem.readAsStringAsync(fileURI, {
+      encoding: FileSystem.EncodingType.Base64,
+    });
+  } catch (error) {
+    console.log("error changing audio to base 64", error);
   }
-  const audio = text.hasOwnProperty("duration");
-  const photo = text.hasOwnProperty("width");
-  if (typeof text === "object") {
-    if (photo) {
-      text = text.base64;
-      return (
-        <View>
-          <Image
-            style={{
-              marginRight: 20,
-              marginBottom: 20,
-              marginLeft: 20,
-              border: "solid",
-              borderWidth: 0.5,
-              borderRadius: 20,
-              width: 150,
-              height: 150,
-              alignSelf: gemini ? "flex-start" : "flex-end",
-            }}
-            source={{ uri: `data:image/jpeg;base64,${text}` }}
-          />
-        </View>
-      );
-    }
-    if (audio) {
-      return (
-        <View
-          style={{
-            justifyContent: "center",
-            marginRight: 20,
-            marginBottom: 20,
-            marginLeft: 20,
-            border: "solid",
-            borderWidth: 0.5,
-            borderRadius: 20,
-            width: 150,
-            height: 50,
-            alignSelf: gemini ? "flex-start" : "flex-end",
-          }}
-        >
-          <View
-            style={{
-              width: 140,
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            {/*Play audio */}
-            <View>
-              <TouchableOpacity
-                style={{
-                  width: 30,
-                  alignItems: "center",
-                }}
-                onPress={() => text.sound.replayAsync()}
-              >
-                {/* Play icon */}
-                <Svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                >
-                  <G fill={green} fill-rule="evenodd">
-                    <Path d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z" />
-                    <Path
-                      fill={green}
-                      d="M5.669 4.76a1.47 1.47 0 0 1 2.04-1.177c1.062.454 3.442 1.533 6.462 3.276c3.021 1.744 5.146 3.267 6.069 3.958c.788.591.79 1.763.001 2.356c-.914.687-3.013 2.19-6.07 3.956c-3.06 1.766-5.412 2.832-6.464 3.28c-.906.387-1.92-.2-2.038-1.177c-.138-1.142-.396-3.735-.396-7.237c0-3.5.257-6.092.396-7.235"
-                    />
-                  </G>
-                </Svg>
-                {/* WaveForm */}
-              </TouchableOpacity>
-            </View>
-            <View
-              style={{
-                alignSelf: "center",
-              }}
-            >
-              <Text>{text.duration}</Text>
-            </View>
-          </View>
-        </View>
-      );
-    }
-  }
+  return data;
 }
 
-function generateWaveForm(data) {
-  const waveForm = [];
-  const amplitude = 100;
-  for (let i = 0; i < data.length; i += amplitude) {
-    waveForm.push(data[i]);
-  }
-  return waveForm;
-}
+const styles = StyleSheet.create({
+  modelOption: {
+    margin: 10,
+  },
+});

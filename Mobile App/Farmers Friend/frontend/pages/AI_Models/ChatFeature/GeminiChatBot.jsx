@@ -2,15 +2,20 @@ import Constants from "expo-constants";
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const API_KEY = Constants.expoConfig.extra.REACT_APP_GEMINI_API_KEY;
 const genAI = new GoogleGenerativeAI(API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 import * as FileSystem from "expo-file-system";
 
 export const GeminiChatBot = async ({
   result,
   isPlantIDv3Input,
   sentMessage,
+  selectedModel,
 }) => {
-  console.log("getting chatbot answer");
+  let model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  if (selectedModel) {
+    selectedModel = selectedModel.toLowerCase().replaceAll(" ", "-");
+    model = genAI.getGenerativeModel({ model: selectedModel });
+  }
+  console.log("getting chatbot answer ", selectedModel);
   // Check which type of object is this
   const audio = result.hasOwnProperty("file");
   const photo = result.hasOwnProperty("width");
@@ -57,7 +62,8 @@ export const GeminiChatBot = async ({
   const chat = model.startChat({ history: histories });
   let response = {
     response: {
-      text: () => "testing",
+      text: () =>
+        "You have reached the limit quota, please try again in a few minutes",
     },
   };
 

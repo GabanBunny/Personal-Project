@@ -141,11 +141,11 @@ export default function App() {
           component={CommunityScreen}
           options={headerOptions}
         /> */}
-        <Tab.Screen
+        {/* <Tab.Screen
           name="Settings"
           component={SettingsScreen}
           options={headerOptions}
-        />
+        /> */}
       </Tab.Navigator>
     </NavigationContainer>
   );

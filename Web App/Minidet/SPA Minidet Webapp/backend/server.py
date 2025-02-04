@@ -11,13 +11,6 @@ import sqlparse
 from sqlparse.sql import Token, Identifier, IdentifierList, Where
 from sqlparse.tokens import Keyword, Wildcard, Whitespace
 
-#Start MongoDB: net start MongoDB
-#Stop MongoDB elevated term: net stop MongoDB 
-
-#Start docker: 
-#Stop docker: docker stop minidet-generator-1
-#Stop docker: docker stop minidet-detector-1
-
 app = Flask(__name__, static_folder='../frontend/build')
 
 # Configure MongoDB UR
@@ -34,19 +27,13 @@ MAPPING_URL = "http://localhost:9091/mapping"
 #attack_mapping retrieve
 attack_mapping = requests.get(MAPPING_URL).json()
 
-#When a user click on the html links, it will trigger app.route coressponding to that function
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
-def serve(path):
-    print(os.path.abspath(app.static_folder))
-    if path != "" and os.path.exists(os.path.join(app.static_folder, path)):
-        return send_from_directory(app.static_folder, path)
-    else:
-        return send_from_directory(app.static_folder, 'index.html')
-
 #Query API
 @app.route('/api/query', methods = ['POST'])
 def query_db():
+    # Extract url parameters
+    current_page = int(request.args.get('currentPage',0))# current page number
+    page_size = int(request.args.get("pageSize", 10)) # Number of records per page
+    skip = current_page*page_size
     try:
        
         # Parse query from input of frontend and remove all whitespaces
@@ -57,43 +44,62 @@ def query_db():
         # Parse to see if the query ? sql : mongo
         sql_query = sqlparse.parse(input_query)
         
-        # print(sql_query[0].tokens)
         isSQL = False
         for tokens in sql_query[0].tokens:
             if(str(tokens).upper() in SQLkeywordSet):
                 isSQL = True
         
-        next = False
+        selectAll = False
+        selectAB = False
         if isSQL:
             db = mongo.db
             for tokens in sql_query[0].tokens:
-                # Select A
+                # Select source_ip from input where source_ip = 59.166.0.1
                 if isinstance(tokens,Identifier):
-                    filter_part = json.loads(str(tokens))
-
+                    selectAB = False
+                
                 if isinstance(tokens,Where):
-                    print(tokens)
-                    
+                    newToken = str(tokens).lower().replace("where", "").strip().replace("=",":").split()
+                    sFirst = f'"{newToken[0]}"'
+                    sMiddle = newToken[1]
+                    sLast = f'"{newToken[-1]}"'
+                    filter_part = json.loads("{" +sFirst + sMiddle + sLast +"}")
+                    if(selectAB == False):
+                        projection_part = ({"_id": 0})    
+                    else:
+                        projection_part = str(projection_part).strip().split(",")
+                        for idx, x in enumerate(projection_part):
+                            x ='"' + x.strip() + '"'
+                            x = x + ": 1"
+                            projection_part[idx] = x.strip()
+                        projection_part.append('"_id": 0')                        
+                        projection_part =json.loads( "{" + ", ".join(projection_part) + "}")
+                
                 # Select A, B
+                # Select source_ip, destination_ip from input where source_ip = 59.166.0.1
                 if isinstance(tokens,IdentifierList):
-                    print(tokens)
-                    # filter_part = json.loads(str(tokens))
-                    filter_part = json.loads("{}")
-                    
+                    selectAB = True
+                    projection_part = str(tokens)
+                
                 # Select *
                 if tokens.ttype == Wildcard:
                     if(str(tokens).upper() == "*"):
                         filter_part = json.loads("{}")
+                        projection_part = ({"_id": 0})
                 
                 # From A 
-                if tokens.ttype == Keyword and next:
+                if tokens.ttype == Keyword and selectAll:
                     collection = db[str(tokens)]
-                    next = False
+                    selectAll = False
                 
                 if tokens.ttype == Keyword:
                     if(str(tokens).upper() == "FROM"):
-                        next = True
-            ans = list(collection.find(filter_part, {"_id": 0}))
+                        selectAll = True
+            
+            print("filter part:", (filter_part))
+            print("projection_part:", projection_part)
+            ans = list(collection.find(filter_part, projection_part).sort('timestamp', -1).skip(skip).limit(page_size))
+            total_page = collection.count_documents(filter_part)
         else:
             # Remove mongo.db.input.find(
             mongoDB_query = input_query.split("(")[1]
@@ -111,17 +117,18 @@ def query_db():
                 # 2. mongo.db.input.find({"attack_name": "Benign"}, {"_id": 0}) 
                 mongoDB_query = mongoDB_query.split(",")
                 filter_part = json.loads(mongoDB_query[0])
+                total_page = collection.count_documents(filter_part)
                 projection_part = json.loads(mongoDB_query[1])
-                ans = list(collection.find(filter_part, projection_part))
+                ans = list(collection.find(filter_part, projection_part).sort('timestamp', -1).skip(skip).limit(page_size))
             else :
                 # No projection
                 # 1. mongo.db.input.find({"attack_name": "Benign"}) 
                 # 3. mongo.db.input.find({"attack_name": "Benign", "protocol": 6}) 
+                total_page = mongoDB_query
                 mongoDB_query = json.loads(mongoDB_query)
                 ans = list(collection.find(mongoDB_query, {"_id": 0}))
-        
-        # print(ans)
-        return jsonify({'query': ans}),200
+                total_page = collection.count_documents(mongoDB_query)
+        return jsonify({'query': ans, "total_page":total_page}),200
     
     except Exception as e:
         print(e)
@@ -149,22 +156,112 @@ def get_data_forTable():
     collection = db.input
     # Exclude id and sort time stamp
     data = list(collection.find({}, {'_id': 0}).sort('timestamp', -1).skip(skip).limit(page_size))
-    
+    # Total number of rows in input page
     total_page = collection.count_documents({})
     return jsonify({"data" :data,
                     "total_page":total_page})
 
-@app.route('/api/data/chart', methods=['GET'])
-def get_data():
-    # Server side pagination reduce overhead and stress
+@app.route('/api/data/user', methods = ['GET'])
+def get_user_forTable():
+     # Server side pagination reduce overhead and stress
     current_page = int(request.args.get('currentPage',0))# current page number
     page_size = int(request.args.get("pageSize", 10)) # Number of records per page
     skip = current_page*page_size
+    db = mongo.db
+    collection = db.user
+    data = list(collection.find({}, {'_id': 0}).sort('timestamp', -1).skip(skip).limit(page_size))
+    total_page = collection.count_documents({})
+    return jsonify({"data":data, "total_page":total_page})
+
+@app.route('/api/remove/user', methods = ['DELETE'])
+def remove_user():
+    db = mongo.db
+    collection = db.user
+    data = request.json
+    user = data.get("userRow")
+    if(user["role"] == "admin"):
+        return jsonify({"delete status": "failed"}),200
+    else:
+            ans = collection.delete_one(user)
+            return jsonify({"delete status": "success"}),200
+
+@app.route('/api/data/chart', methods=['GET'])
+def get_data():
     db = mongo.db
     collection = db.input
     # Exclude id and sort time stamp
     data = list(collection.find({}, {'_id': 0}).sort('timestamp', -1))
     return jsonify(data)
+
+@app.route('/api/create/new/user',methods = ['POST'])
+def create_new_user():
+    db = mongo.db
+    collection = db.user
+    data = request.json
+    userInput = {
+        "username" : data.get("username"),
+        "password": data.get("password"),
+        "first_name": data.get("firstName"),
+        "last_name":data.get("lastName"),
+        "email": data.get("email"),
+        "role": data.get("role"),
+    }
+    ifUserExist = collection.find_one(userInput)
+    if ifUserExist == None:
+        collection.insert_one(userInput)
+        return jsonify({"Create user status": "success"}),200
+    return jsonify({"Create user status": "failed"}),400
+    
+@app.route('/api/Login',methods = ['POST'])
+def get_login():
+    db = mongo.db
+    collection = db.user
+    data = request.json
+    username = data.get('saveLogin')
+    password = data.get('savePassword')
+    
+    # Check if username exists in DB
+    user = collection.find_one({'username': username})
+    if user: 
+        if(user['password']) == password:
+            return jsonify({"status":"success"}),200
+        else:
+            return jsonify({"status":"failed"}),200
+    else:
+        return jsonify({"status":"failed"}),200
+
+@app.route('/api/user/info',methods =['GET'])
+def get_user_info():
+    db = mongo.db
+    collection = db.user
+    username = str(request.args.get('userData',""))# current page number
+    ans = collection.find_one({'username': username},{'_id': 0})
+    return jsonify({"userData": ans})
+
+# Save Edit profile data
+@app.route('/api/user/update/profile',methods =['PUT'])
+def update_user_info():
+    db = mongo.db
+    collection = db.user
+    data = request.json
+    update_query = {"$set":{
+        "username":data.get("formData")["username"],
+        "password": data.get("formData")["password"],
+        "first_name": data.get("formData")["first_name"],        
+        "last_name": data.get("formData")["last_name"],
+
+
+        "email": data.get("formData")["email"],
+        "role": data.get("formData")["role"],
+    }}
+    ans = collection.update_one({"username":data.get("username")},update_query)
+    if ans.raw_result.get("updatedExisting"):
+        if ans.raw_result.get("nModified") > 1:
+            return jsonify({"Update user status": "error"}),200
+        else:
+            return jsonify({"Update user status": "success"}),200
+    else:
+        return jsonify({"Update user status": "failed"}),200
 
 #Store data
 def store_data_generator():
@@ -239,7 +336,6 @@ def store_data_generator():
     else:
         print("Generator Error:", response.status_code)
 
-        
 if __name__ == "__main__":
         #Use thread to run concurrently
         data_thread = threading.Thread(target = store_data_generator)

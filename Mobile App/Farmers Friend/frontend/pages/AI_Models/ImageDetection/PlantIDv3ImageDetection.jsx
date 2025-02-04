@@ -2,6 +2,7 @@ import Constants from "expo-constants";
 const API_KEY = Constants.expoConfig.extra.REACT_APP_PLANT_ID_API_KEY;
 
 export const PlantIDv3ImageDetection = async ({ base64Image }) => {
+  console.log("PlantIDv3ImageDetection function called"); // Add this line
   var endpoint = "https://api.plant.id/v3/health_assessment";
   var settings = {
     method: "POST",
@@ -24,7 +25,7 @@ export const PlantIDv3ImageDetection = async ({ base64Image }) => {
         response = await fetch(endpoint, settings);
         if (response.ok) {
           result = await response.json();
-          // Find the disease with the highest probability 
+          // Find the disease with the highest probability
           let max = 0;
           let ans = null;
           result.result.disease.suggestions.forEach((suggestion) => {

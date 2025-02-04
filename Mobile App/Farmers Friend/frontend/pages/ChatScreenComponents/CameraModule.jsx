@@ -1,7 +1,6 @@
-import GPTImageDetection from "../AI_Models/ImageDetection/GPTImageDetection";
-import OllamaImageDetection from "../AI_Models/ImageDetection/OllamaImageDetection";
-import PlantIDv3ImageDetection from "../AI_Models/ImageDetection/PlantIDv3ImageDetection";
-
+import GPTImageDetection from "../AI_Models/ImageDetection/GPTImageDetection.jsx";
+import OllamaImageDetection from "../AI_Models/ImageDetection/OllamaImageDetection.jsx";
+import { PlantIDv3ImageDetection } from "../AI_Models/ImageDetection/PlantIDv3ImageDetection";
 import { GeminiChatBot } from "../AI_Models/ChatFeature/GeminiChatBot";
 import { CameraView, CameraType, useCameraPermissions } from "expo-camera";
 import { useState, useRef } from "react";
@@ -14,8 +13,9 @@ import {
   Dimensions,
   Keyboard,
 } from "react-native";
-
 import Svg, { Path, Circle } from "react-native-svg";
+import ImageCropperModule from "./ImageCropperModule.jsx";
+
 const green = "#00C853";
 const RecGreen = "#4CAF50";
 const RecGrey = "#828896";
@@ -36,6 +36,7 @@ export default function Camera({
   const [permission, requestPermission] = useCameraPermissions();
   const [cameraState, setCameraState] = useState(false);
   const cameraRef = useRef(null);
+  const [photo, setPhoto] = useState(null);
 
   if (!permission) {
     // Camera permissions are still loading.
@@ -62,58 +63,7 @@ export default function Camera({
     const photo = await cameraRef.current.takePictureAsync({
       base64: true,
     });
-    // var result = await PlantIDv3ImageDetection({ base64Image: photo.base64 });
-
-    // Sample
-    var result = {
-      details: {
-        description:
-          "Disorders induced by organisms from the animal kingdom. These pests cause direct damage by feeding on leaves, stems, roots, and other parts of the plant or by inhabiting plant tissues. Pests can also spread bacterial and viral diseases.",
-        entity_id: "d24ebab7c0155e4b",
-        language: "en",
-        treatment: {
-          biological: ["Use predatory insects like ladybugs."],
-          chemical: ["Apply insecticides as per recommendations."],
-          prevention: ["Maintain plant health and use crop rotation."],
-        },
-      },
-      id: "d24ebab7c0155e4b",
-      name: "Animalia",
-      probability: 0.5544,
-
-      //   details: {
-      //     description:
-      //       "Fungi take energy from the plants on which they live, causing damage to the plant. Fungal infections are responsible for approximately two-thirds of infectious plant diseases and cause wilting, molding, rusts, scabs, rotted tissue, and other problems.",
-      //     entity_id: "7f22438065988f95",
-      //     language: "en",
-      //     treatment: {
-      //       biological: [Array],
-      //       chemical: [Array],
-      //       prevention: [Array],
-      //     },
-      //   },
-      //   id: "7f22438065988f95",
-      //   name: "Fungi",
-      //   probability: 0.5162,
-    };
-    setPlantIDans(result);
-    if (!CropScreen) {
-      // Store photo base64 as a string (from user taking picture)
-
-      setSentMessage((previousUserMessage) => [...previousUserMessage, photo]);
-      result = await GeminiChatBot({
-        result: result,
-        isPlantIDv3Input: true,
-        sentMessage: sentMessage,
-      });
-      result = await result.response.text();
-      // // Store Gemini response
-      setSentMessage((previousGeminiMessage) => [
-        ...previousGeminiMessage,
-        result,
-      ]);
-      console.log("getting response");
-    }
+    setPhoto(photo);
   };
   return (
     <View style={styles.container}>
@@ -133,6 +83,24 @@ export default function Camera({
               style={styles.button}
               onPress={toggleCameraFacing}
             >
+              {photo ? (
+                <View style={{}}>
+                  <ImageCropperModule
+                    uri={photo.uri}
+                    photo={photo}
+                    setPhoto={setPhoto}
+                    CropScreen={CropScreen}
+                    setCameraState={setCameraState}
+                    setIsPressed={setIsPressed}
+                    setPlantIDans={setPlantIDans}
+                    setSentMessage={setSentMessage}
+                    sentMessage={sentMessage}
+                    setHasCameraOpened={setHasCameraOpened}
+                  />
+                </View>
+              ) : (
+                <View></View>
+              )}
               <Svg
                 xmlns="http://www.w3.org/2000/svg"
                 width={(TakePictureCircleWidth * 2) / 3}
@@ -155,9 +123,6 @@ export default function Camera({
               style={styles.button}
               onPress={async () => {
                 await takePhoto(); //Wait for the photo to finish taking
-                // Close camera and set is Pressed
-                CropScreen ? null : setCameraState(false);
-                CropScreen ? null : setIsPressed(false);
               }}
             >
               <Svg
