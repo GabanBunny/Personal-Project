@@ -1,0 +1,85 @@
+/* Begin reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --sidebar-width: 190px;
+  --header-height: 70px;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: white;
+}
+.header {
+  position: fixed;
+  width: 100vw;
+  height: var(--header-height);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: white;
+  border: 1px solid #dddddd;
+  z-index: 3;
+}
+#headerLogo {
+  height: var(--header-height);
+}
+#imageNav {
+  height: var(--header-height);
+}
+#image {
+  height: var(--header-height);
+  transform: scale(0.8);
+}
+.sidebar {
+  margin-top: var(--header-height);
+  width: var(--sidebar-width);
+  height: 100vh;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: fixed;
+  z-index: 2;
+  border: 1px solid #dddddd;
+}
+
+.sidebar nav {
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Make the hover effect row even*/
+}
+.sidebar nav a {
+  text-decoration: none;
+  color: black;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 10px;
+}
+/* .sidebar nav a:hover {
+  background-color: #ddddd1; /* Optional hover effect */
+/* } */
+
+.sidebar a svg {
+  vertical-align: -0.125em;
+  margin-right: 8px;
+  margin-left: 8px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+body {
+  background-color: rgb(221, 221, 221);
+  height: 100%;
+}
+main {
+  padding-left: var(--sidebar-width);
+  padding-top: var(--header-height);
+}

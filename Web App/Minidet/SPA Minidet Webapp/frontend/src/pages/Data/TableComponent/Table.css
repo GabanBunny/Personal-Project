@@ -1,0 +1,88 @@
+#TableContainer {
+  margin-top: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+#topOfTable {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-right: 20px;
+}
+#queryBar {
+  border-radius: 5px;
+}
+table {
+  width: calc(100% - 20px); /* Subtract 20px from each side */
+  border-collapse: collapse;
+  margin-top: 10px;
+  margin-right: 20px;
+  font-size: 10px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  overflow: hidden;
+  /* Stop the table from shrinking and expanding a little */
+  table-layout: fixed;
+}
+thead {
+  background-color: #007bb5;
+  color: #ffffff;
+  text-align: left;
+  font-weight: bold;
+}
+
+th,
+td {
+  padding: 12px 15px;
+  text-align: center;
+}
+
+tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+/* Column Layout for Table */
+th:nth-child(1), td:nth-child(1) { width: 10%; } /* Source IP */
+th:nth-child(2), td:nth-child(2) { width: 7%; }  /* Source Port */
+th:nth-child(3), td:nth-child(3) { width: 10%; } /* Target IP */
+th:nth-child(4), td:nth-child(4) { width: 7%; }  /* Target Port */
+th:nth-child(5), td:nth-child(5) { width: 8%; }  /* Protocol */
+th:nth-child(6), td:nth-child(6) { width: 8%; }  /* Layer 7 Protocol */
+th:nth-child(7), td:nth-child(7) { width: 8%; }  /* Input Bytes */
+th:nth-child(8), td:nth-child(8) { width: 10%; } /* Output Bytes */
+th:nth-child(9), td:nth-child(9) { width: 8%; }  /* Input Packets */
+th:nth-child(10), td:nth-child(10) { width: 8%; } /* Output Packets */
+th:nth-child(11), td:nth-child(11) { width: 5%; } /* Sum TCP Flags */
+th:nth-child(12), td:nth-child(12) { width: 8%; } /* Flow Duration */
+th:nth-child(13), td:nth-child(13) { width: 8%; } /* Anomality */
+th:nth-child(14), td:nth-child(14) { width: 8%; } /* Attack ID */
+th:nth-child(15), td:nth-child(15) { width: 10%; } /* Confidence */
+th:nth-child(16), td:nth-child(16) { width: 6%; } /* Attack Name */
+th:nth-child(17), td:nth-child(17) { width: 10%; } /* Timestamp */
+
+input:not(#queryBar),
+select:not(#ColumnVisibility) {
+  width: 5px;
+}
+select:not(#NumberOfRows) {
+  background-color: transparent; 
+  border: none; 
+  padding: 10px; 
+  font-size: 16px; 
+  outline: none; /* Remove focus outline */
+}
+#pagination {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-right: 20px;
+}
+
+#pagination button,
+#paginationMiddle {
+  margin-top: 5px;
+  padding: 5px;
+}
