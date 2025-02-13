@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phase 1 - Heart's Decode</title>
+    <style>
+      :root {
+        --love-red: #ff3860;
+        --passion-pink: #ff69b4;
+        --rose-gold: #b76e79;
+        --champagne: #f7e7ce;
+        --success: #50c878;
+        --error: #ff4444;
+        --text: #2d2d2d;
+        --background-gradient: linear-gradient(135deg, #fff5f5, #ffe6e6);
+      }
+
+      body {
+        background: var(--background-gradient);
+        font-family: "Playfair Display", serif;
+        min-height: 100vh;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .game-container {
+        max-width: 800px;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(255, 105, 180, 0.15);
+        padding: 2rem;
+        text-align: center;
+      }
+
+      .puzzle-card {
+        padding: 2rem;
+        border: 2px solid var(--champagne);
+        border-radius: 15px;
+        margin: 1.5rem 0;
+        background: linear-gradient(145deg, #fff, #fff8f8);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+      }
+
+      .puzzle-card:not(.active) {
+        display: none;
+        opacity: 0;
+      }
+
+      .heart-header {
+        text-align: center;
+        font-size: 2.5rem;
+        color: var(--love-red);
+        margin: 2rem 0;
+      }
+
+      .love-input {
+        padding: 1rem;
+        border: 2px solid var(--rose-gold);
+        border-radius: 10px;
+        font-size: 1.1rem;
+        width: 200px;
+        margin: 1rem 0;
+        transition: all 0.3s;
+        text-align: center;
+      }
+
+      .flower-grid {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin: 2rem 0;
+      }
+
+      .flower-btn {
+        background: white;
+        border: 2px solid var(--rose-gold);
+        border-radius: 15px;
+        padding: 1rem;
+        cursor: pointer;
+        font-size: 2rem;
+        transition: all 0.3s;
+      }
+
+      .flower-btn:hover {
+        transform: scale(1.1);
+        background: var(--love-red);
+        color: white;
+      }
+
+      .door-btn {
+        display: inline-block;
+        padding: 1rem 2rem;
+        font-size: 1.2rem;
+        color: white;
+        background: var(--love-red);
+        border: none;
+        border-radius: 10px;
+        text-decoration: none;
+        transition: all 0.3s;
+      }
+
+      .door-btn:hover {
+        background: var(--passion-pink);
+        transform: scale(1.05);
+      }
+
+      .action-btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+        background: var(--success);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .action-btn:hover {
+        background: #50b767;
+      }
+    </style>
+  </head>
+  <body>
+    <iframe src="../adventure.mp3" style="display: none"></iframe>
+    <div class="game-container">
+      <div class="puzzle-card active" id="puzzle1">
+        <h2 class="heart-header">Heart's Arithmetic</h2>
+        <p>(Years Together × Letters in "Love") + Vowels in "Destiny"</p>
+        <input type="number" class="love-input" id="mathAnswer" />
+        <button class="action-btn" onclick="validateMath()">Solve</button>
+      </div>
+
+      <div class="puzzle-card" id="puzzle2">
+        <h2 class="heart-header">This is a name of a flower</h2>
+        <div class="flower-grid">
+          <button class="flower-btn" data-letter="S">🌺</button>
+          <button class="flower-btn" data-letter="O">🌸</button>
+          <button class="flower-btn" data-letter="E">🏵️</button>
+          <button class="flower-btn" data-letter="R">🌹</button>
+        </div>
+        <p id="flowerOutput">Selected:</p>
+        <button class="action-btn" onClick="remove()">Delete</button>
+      </div>
+
+      <div class="puzzle-card" id="puzzle3">
+        <h2 class="heart-header">Which is the correct door?</h2>
+        <div class="flower-grid">
+          <a href="../phases/phase2.html" class="door-btn">🌺</a>
+          <a href="#" class="door-btn">🌸</a>
+          <a href="#" class="door-btn">🏵️</a>
+          <a href="#" class="door-btn">🌹</a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let currentPuzzle = 1;
+      let flowerSequence = [];
+
+      function showNextPuzzle() {
+        document.getElementById(`puzzle${currentPuzzle}`).classList.remove("active");
+        currentPuzzle++;
+        setTimeout(() => {
+          document.getElementById(`puzzle${currentPuzzle}`).classList.add("active");
+        }, 300);
+      }
+
+      function validateMath() {
+        if (document.getElementById("mathAnswer").value === "14") {
+          showNextPuzzle();
+        }
+      }
+
+      document.querySelectorAll(".flower-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          flowerSequence.push(btn.dataset.letter);
+          document.getElementById("flowerOutput").textContent = "Selected: " + flowerSequence.join("");
+          if (flowerSequence.join("") === "ROSE") {
+            showNextPuzzle();
+          }
+        });
+      });
+
+      function remove() {
+        if (flowerSequence.length > 0) {
+          flowerSequence.shift();
+          document.getElementById("flowerOutput").textContent = "Selected: " + flowerSequence.join("");
+        }
+      }
+    </script>
+  </body>
+</html>

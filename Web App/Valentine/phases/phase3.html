@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Valentine's Invitation</title>
+    <style>
+      :root {
+        --primary-color: #ff69b4;
+        --secondary-color: #ffb8d7;
+        --accent-color: #ff1493;
+        --text-color: #2d2d2d;
+        --success-color: #50c878;
+        --box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: linear-gradient(135deg, var(--secondary-color), #ffd3e6);
+        font-family: "Playfair Display", serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+        overflow: hidden;
+      }
+
+      .letter-container {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        padding: 3rem;
+        max-width: 600px;
+        box-shadow: var(--box-shadow);
+        position: relative;
+        overflow: hidden;
+        border: 2px solid var(--primary-color);
+        animation: fadeIn 1.5s ease-in-out;
+      }
+
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .letter-header {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        background: linear-gradient(
+          45deg,
+          var(--primary-color),
+          var(--accent-color)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        border-bottom: 2px solid var(--primary-color);
+        padding-bottom: 1rem;
+        animation: float 3s infinite ease-in-out;
+      }
+
+      .letter-content {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: var(--text-color);
+        position: relative;
+      }
+
+      .highlight {
+        color: var(--accent-color);
+        font-weight: 600;
+      }
+
+      .schedule {
+        margin: 2rem 0;
+        padding: 1.5rem;
+        background: rgba(255, 105, 180, 0.1);
+        border-radius: 15px;
+        border-left: 4px solid var(--primary-color);
+        animation: slideIn 1s ease-in-out;
+      }
+
+      @keyframes slideIn {
+        0% {
+          transform: translateX(-20px);
+          opacity: 0;
+        }
+        100% {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      .signature {
+        text-align: right;
+        margin-top: 2rem;
+        font-style: italic;
+        font-size: 1.2rem;
+        color: var(--primary-color);
+        animation: fadeIn 2s ease-in-out;
+      }
+
+      .heart-decoration {
+        position: absolute;
+        opacity: 0.1;
+        pointer-events: none;
+        animation: float 6s infinite ease-in-out;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      .envelope {
+        position: absolute;
+        bottom: -50px;
+        right: -30px;
+        font-size: 10rem;
+        color: var(--primary-color);
+        opacity: 0.2;
+        animation: float 4s infinite ease-in-out;
+      }
+
+      .confetti {
+        position: fixed;
+        width: 10px;
+        height: 10px;
+        background: var(--primary-color);
+        pointer-events: none;
+        animation: fall 5s linear infinite;
+      }
+
+      @keyframes fall {
+        0% {
+          transform: translateY(-100vh) rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(100vh) rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      .love-button {
+        display: block;
+        margin: 2rem auto 0;
+        padding: 1rem 2rem;
+        font-size: 1.2rem;
+        background: linear-gradient(
+          45deg,
+          var(--primary-color),
+          var(--accent-color)
+        );
+        color: white;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+      }
+
+      .love-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 20px rgba(255, 105, 180, 0.4);
+      }
+    </style>
+  </head>
+  <iframe src="../valentine.m4a" style="display: none"></iframe>
+
+  <body>
+    <div class="letter-container">
+      <!-- Floating Hearts -->
+      <div
+        class="heart-decoration"
+        style="top: -30px; left: -30px; font-size: 8rem"
+      >
+        ❤
+      </div>
+      <div
+        class="heart-decoration"
+        style="bottom: -50px; right: -30px; font-size: 10rem"
+      >
+        ❤
+      </div>
+      <div class="envelope">💌</div>
+
+      <h1 class="letter-header">VALENTINE PROPOSAL</h1>
+
+      <div class="letter-content">
+        <p>Dear Bong,</p>
+
+        <p>💖Your Message Here💖</p>
+
+        <div class="schedule">
+          <span class="highlight">Valentine Calendar 14/2/2025:</span>
+          <ul>
+            <li>A:</li>
+            <li>B:</li>
+            <li>C:</li>
+          </ul>
+        </div>
+
+        <p>❤️</p>
+
+        <div class="signature">
+          <p>Best Regards</p>
+          <p>Wally</p>
+        </div>
+
+        <button class="love-button" onclick="createConfetti()">
+          Accept with Joy ❤️
+        </button>
+      </div>
+    </div>
+
+    <script>
+      // Confetti Effect
+      function createConfetti() {
+        for (let i = 0; i < 100; i++) {
+          const confetti = document.createElement("div");
+          confetti.className = "confetti";
+          confetti.style.left = Math.random() * 100 + "vw";
+          confetti.style.animation = `fall ${Math.random() * 3 + 2}s linear`;
+          confetti.style.backgroundColor = `hsl(${
+            Math.random() * 360
+          }, 100%, 75%)`;
+          document.body.appendChild(confetti);
+        }
+      }
+    </script>
+  </body>
+</html>

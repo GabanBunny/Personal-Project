@@ -72,24 +72,25 @@ async function sendPlantIDv3(
   // Sample
   var result = {
     // Disease 1
-    details: {
-      description:
-        "Water excess and uneven watering are abiotic disorders caused by inadequate watering. Water excess may lead to rotting of the roots due to lack of oxygen, and higher susceptibility to infection. Symptoms of over-watering include stunted growth, yellow and brown leaves, wilting and higher susceptibility to leaf burn.",
-      entity_id: "e5eed7f688efa59e",
-      language: "en",
-      treatment: {
-        biological: [
-          "Introduce mycorrhizal fungi to improve root water uptake.",
-        ],
-        prevention: [
-          "Improve soil drainage by adding sand or gravel to heavy clay soils.",
-        ],
-      },
-    },
-    id: "e5eed7f688efa59e",
-    name: "water excess or uneven watering",
-    probability: 0.4724,
+    // details: {
+    //   description:
+    //     "Water excess and uneven watering are abiotic disorders caused by inadequate watering. Water excess may lead to rotting of the roots due to lack of oxygen, and higher susceptibility to infection. Symptoms of over-watering include stunted growth, yellow and brown leaves, wilting and higher susceptibility to leaf burn.",
+    //   entity_id: "e5eed7f688efa59e",
+    //   language: "en",
+    //   treatment: {
+    //     biological: [
+    //       "Introduce mycorrhizal fungi to improve root water uptake.",
+    //     ],
+    //     prevention: [
+    //       "Improve soil drainage by adding sand or gravel to heavy clay soils.",
+    //     ],
+    //   },
+    // },
+    // id: "e5eed7f688efa59e",
+    // name: "water excess or uneven watering",
+    // probability: 0.4724,
 
+    // Disease 2
     // details: {
     //   description:
     //     "Disorders induced by organisms from the animal kingdom. These pests cause direct damage by feeding on leaves, stems, roots, and other parts of the plant or by inhabiting plant tissues. Pests can also spread bacterial and viral diseases.",
@@ -104,20 +105,24 @@ async function sendPlantIDv3(
     // id: "d24ebab7c0155e4b",
     // name: "Animalia",
     // probability: 0.5544,
-    // details: {
-    //   description:
-    //     "Fungi take energy from the plants on which they live, causing damage to the plant. Fungal infections are responsible for approximately two-thirds of infectious plant diseases and cause wilting, molding, rusts, scabs, rotted tissue, and other problems.",
-    //   entity_id: "7f22438065988f95",
-    //   language: "en",
-    //   treatment: {
-    //     biological: [Array],
-    //     chemical: [Array],
-    //     prevention: [Array],
-    //   },
-    // },
-    // id: "7f22438065988f95",
-    // name: "Fungi",
-    // probability: 0.5162,
+
+    // Disease 3s
+    details: {
+      description:
+        "Fungi take energy from the plants on which they live, causing damage to the plant. Fungal infections are responsible for approximately two-thirds of infectious plant diseases and cause wilting, molding, rusts, scabs, rotted tissue, and other problems.",
+      entity_id: "7f22438065988f95",
+      language: "en",
+      treatment: {
+        biological: ["biofungicides containing Bacillus subtilis"],
+        chemical: ["Use systemic fungicides like azoxystrobin or tebuconazole"],
+        prevention: ["Avoid overwatering, improve soil drainage"],
+      },
+    },
+    id: "7f22438065988f95",
+    name: "Fungi",
+    probability: 0.5162,
+
+    // Disease 4
     // "details": {
     //   "description": "Plant death occurs when all parts of the plant (including stems and roots) irreversibly lose their vitality. The dead plant usually loses its leaves or has brown leaves and mushy stems and roots.",
     //   "treatment": {},
@@ -128,7 +133,7 @@ async function sendPlantIDv3(
     // "probability": 0.0634,
   };
   setPlantIDans(result);
-
+  console.log(JSON.stringify(result, null, 2));
   if (!CropScreen) {
     // Store photo base64 as a string (from user taking picture)
     setSentMessage((previousUserMessage) => [...previousUserMessage, photo]);

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phase 2 - Escape Room</title>
+    <style>
+      :root {
+        --primary-color: #ff69b4;
+        --secondary-color: #ffb8d7;
+        --success-color: #50c878;
+        --almost-color: #ffd700;
+        --error-color: #ff4444;
+        --text-color: #2d2d2d;
+        --lock-color: #ff69b4;
+        --accent-color: #ff1493;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--secondary-color);
+        color: var(--text-color);
+      }
+
+      .container {
+        display: flex;
+        min-height: 100vh;
+        position: relative;
+      }
+
+      .quiz-container {
+        flex: 1;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        margin: 20px;
+        border-radius: 15px;
+      }
+
+      .button-container {
+        position: absolute;
+        top: 50%;
+        right: 2rem;
+        transform: translateY(-50%);
+        width: 450px;
+        z-index: 1;
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .button-row {
+        display: flex;
+        justify-content: space-between;
+        margin: 1rem 0;
+      }
+
+      button {
+        width: 60px;
+        height: 60px;
+        border-radius: 15px;
+        border: none;
+        background: var(--primary-color);
+        color: white;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+        background: #ff1493;
+      }
+
+      #output {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--text-color);
+        padding: 1rem;
+        background: #f8f8f8;
+        border-radius: 10px;
+        margin: 1rem 0;
+      }
+
+      .quiz-header {
+        text-align: center;
+        margin-bottom: 2rem;
+        padding: 2rem;
+        background: linear-gradient(135deg, var(--primary-color), #ff85b2);
+        color: white;
+        border-radius: 15px;
+      }
+
+      .question {
+        margin: 2rem 0;
+        padding: 1.5rem;
+        background: #f8f8f8;
+        border-radius: 10px;
+      }
+
+      input[type="text"] {
+        width: 120px;
+        height: 60px;
+        font-size: 1.2rem;
+        border: 2px solid #ddd;
+        border-radius: 10px;
+        padding: 0.5rem;
+        transition: all 0.3s ease;
+        margin-right: 1rem;
+      }
+
+      input[type="text"]:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 8px rgba(255, 105, 180, 0.3);
+      }
+
+      .links-section {
+        margin: 2rem 0;
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .links-section a {
+        text-decoration: none;
+        color: var(--primary-color);
+        padding: 0.5rem 1rem;
+        border: 2px solid var(--primary-color);
+        border-radius: 25px;
+        transition: all 0.3s ease;
+      }
+
+      .links-section a:hover {
+        background: var(--primary-color);
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      .lock-image {
+        width: 100%;
+        max-width: 400px;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .reset-btn {
+        background: var(--error-color);
+        width: auto;
+        padding: 0.8rem 1.5rem;
+        border-radius: 25px;
+        font-size: 1rem;
+      }
+
+      .reset-btn:hover {
+        background: #ff3333;
+      }
+      #submit-btn {
+        background: var(--success-color);
+        width: auto;
+        padding: 0.8rem 1.5rem;
+        border-radius: 25px;
+        font-size: 1rem;
+      }
+      #submit-btn:hover {
+        background: #50b767;
+      }
+
+      #next-btn {
+        background-color: transparent;
+        border: none;
+        box-shadow: none;
+        font-size: 0px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <iframe src="../adventure.mp3" style="display: none"></iframe>
+
+    <div class="container">
+      <div class="quiz-container">
+        <!-- Quiz Header -->
+        <div class="quiz-header">
+          <h1>ESCAPE ROOM</h1>
+          <p>To find the date you seek, look not forward but <em>back</em></p>
+          <p>Números to ledər, a cipher you must crack</p>
+          <p>After you find the message, <em>reverse</em> to go further</p>
+          <p>Ledər to números, the key is in the mirrors</p>
+        </div>
+
+        <!-- First Question -->
+        <div class="question">
+          <div style="display: flex; align-items: center; gap: 1rem">
+            <input
+              id="answerInput"
+              type="text"
+              placeholder="Your answer"
+              oninput="validateAnswer(this.value)"
+            />
+            <p>
+              was born in a Florentine nobleman during the Renaissance, I am an
+              <em>assassin</em>, working for my <em>creed</em>. <br />
+              Now retired,
+              <em>Undressing Luna In Flower & Spice</em>, being the knight when
+              <em>Gotham Needs You</em>. Who am i now?
+            </p>
+          </div>
+        </div>
+
+        <div class="question">
+          <!-- Second Question -->
+          <!-- Links Section -->
+          <div class="links-section">
+            <a href="https://www.youtube.com/watch?v=HxX62WIX3SI"
+              ><em>Which</em></a
+            >
+            <a
+              href="https://www.youtube.com/watch?v=BtAKkC7wIHc&list=PLYYyUhZKiEj59aNMppRfRc_F_MYI_ccLH"
+              >ones</a
+            >
+            <a
+              href="https://www.youtube.com/watch?v=NUdqBcy8z00&list=PLYYyUhZKiEj59aNMppRfRc_F_MYI_ccLH&index=2"
+              >are</a
+            >
+            <a href="https://www.youtube.com/watch?v=wwb7WkZ1Slg">the</a>
+            <a
+              href="https://www.youtube.com/watch?v=NUdqBcy8z00&list=PLYYyUhZKiEj59aNMppRfRc_F_MYI_ccLH&index=2"
+              >correct</a
+            >
+            <a
+              href="https://www.youtube.com/watch?v=j8kVu61F6js&list=PLYYyUhZKiEj59aNMppRfRc_F_MYI_ccLH&index=4"
+              >link.</a
+            >
+            <a
+              href="https://www.youtube.com/watch?v=MSYTB74d8kc&list=PLYYyUhZKiEj59aNMppRfRc_F_MYI_ccLH&index=5"
+              >Find</a
+            >
+            <a
+              href="https://www.youtube.com/watch?v=4qeJMLMyDjM&list=PLYYyUhZKiEj59aNMppRfRc_F_MYI_ccLH&index=6"
+              >the</a
+            >
+            <a href="https://www.youtube.com/watch?v=TxoLlLnqa-M">right</a>
+            <a
+              href="https://www.youtube.com/watch?v=4qeJMLMyDjM&list=PLYYyUhZKiEj59aNMppRfRc_F_MYI_ccLH&index=8"
+              >ones</a
+            >
+            <a href="https://www.youtube.com/watch?v=GRxofEmo3HA">four</a>
+            <a
+              href="https://www.youtube.com/watch?v=4qeJMLMyDjM&list=PLYYyUhZKiEj59aNMppRfRc_F_MYI_ccLH&index=8"
+              >you</a
+            >
+          </div>
+        </div>
+
+        <!-- Password Section -->
+        <div id="output">Password:</div>
+        <div
+          style="display: flex; justify-content: space-between; width: 1250px"
+        >
+          <button class="reset-btn" onclick="clearOutput()">Reset</button>
+          <button id="next-btn">
+            <a style="text-decoration: none" href="../phases/phase3.html">
+              Next
+            </a>
+          </button>
+          <button id="submit-btn" onclick="validatePassword()">Submit</button>
+        </div>
+      </div>
+
+      <!-- Lock and Buttons -->
+      <div class="button-container">
+        <img
+          src="../Images.png/Lock.jpg"
+          alt="Number Lock"
+          class="lock-image"
+        />
+        <div class="button-row">
+          <button onclick="saveButtonContent('1')">1</button>
+          <button onclick="saveButtonContent('2')">2</button>
+          <button onclick="saveButtonContent('3')">3</button>
+          <button onclick="saveButtonContent('4')">4</button>
+          <button onclick="saveButtonContent('5')">5</button>
+        </div>
+        <div class="button-row">
+          <button onclick="saveButtonContent('6')">6</button>
+          <button onclick="saveButtonContent('7')">7</button>
+          <button onclick="saveButtonContent('8')">8</button>
+          <button onclick="saveButtonContent('9')">9</button>
+          <button onclick="saveButtonContent('0')">0</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Array to store button values
+      let savedContent = [];
+
+      // Function to save button content
+      function saveButtonContent(value) {
+        savedContent.push(value); // Add the value to the array
+        updateOutput(); // Update the displayed output
+      }
+
+      function updateOutput() {
+        const outputElement = document.getElementById("output");
+        // Display the last pressed button
+        outputElement.textContent = `Password: ${savedContent.join("")}`;
+      }
+
+      function clearOutput() {
+        savedContent = [];
+        updateOutput();
+      }
+
+      function validateAnswer(value) {
+        if (value.trim().toLowerCase() === atob("ZW96aQ==")) {
+          document.getElementById("answerInput").style.background =
+            "var(--success-color)";
+        } else if (
+          value.trim().toLowerCase() === atob("ZXppbw==") ||
+          value.trim().toLowerCase() === atob("ZXppbyBhdWRpdG9yZQ==")
+        ) {
+          document.getElementById("answerInput").style.background =
+            "var(--almost-color)";
+        } else {
+          document.getElementById("answerInput").style.background =
+            "var(--error-color)";
+        }
+      }
+
+      function validatePassword() {
+        let userInput = savedContent;
+        let passwordStatus = 0;
+        const correctPassword = atob("WzEsNSwwLDMsMiwwLDIsMl0=");
+        correctPassword.split(",").forEach((num, index) => {
+          passwordStatus += num == [userInput[index]];
+        });
+
+        if (passwordStatus == 6)
+          document.getElementById("next-btn").style.cssText = `
+          display: block;
+          margin: 0 auto;
+          padding: 1rem 2rem;
+          font-size: 1.2rem;
+          background: linear-gradient(
+              45deg,
+              var(--lock-color),
+              var(--accent-color)
+          );
+          color: white;
+          border: none;
+          border-radius: 30px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          text-decoration: none;
+          width: fit-content;
+          box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+      `;
+      }
+    </script>
+  </body>
+</html>
