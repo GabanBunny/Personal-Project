@@ -80,21 +80,29 @@ def benchMarkGemini():
     count = 0
     results = []
     labels = ['Apple___alternaria_leaf_spot', 'Apple___black_rot', 'Apple___brown_spot', 'Apple___gray_spot', 'Apple___healthy', 'Apple___rust', 'Apple___scab', 'Bell_pepper___bacterial_spot', 'Bell_pepper___healthy', 'Blueberry___healthy', 'Cassava___bacterial_blight', 'Cassava___brown_streak_disease', 'Cassava___green_mottle', 'Cassava___healthy', 'Cassava___mosaic_disease', 'Cherry___healthy', 'Cherry___powdery_mildew', 'Coffee___healthy', 'Coffee___red_spider_mite', 'Coffee___rust', 'Corn___common_rust', 'Corn___gray_leaf_spot', 'Corn___healthy', 'Corn___northern_leaf_blight', 'Grape___black_measles', 'Grape___black_rot', 'Grape___healthy', 'Grape___Leaf_blight', 'Orange___citrus_greening', 'Peach___bacterial_spot', 'Peach___healthy', 'Potato___bacterial_wilt', 'Potato___early_blight', 'Potato___healthy', 'Potato___late_blight', 'Potato___leafroll_virus', 'Potato___mosaic_virus']
-    label_map = {}
-    for idx, label in enumerate():
-        label_map[label] = idx
     
+    label_map = {}
+    for idx, label in enumerate(labels):
+        label_map[label] = idx
     for folder in os.listdir(SUBSET_DIR):
         folder_path = os.path.join(SUBSET_DIR, folder)
         for img_file in os.listdir(folder_path):
+            
+            #Get list of items
+            shuffled_items = list(label_map.items())
+            # Shuffle the items
+            random.shuffle(shuffled_items)
+            # Convert shuffled list back to dictionary
+            shuffled_map = dict(shuffled_items)
+
+            
             img_path = os.path.join(folder_path, img_file)
             image = PIL.Image.open(img_path)        
             predicted_text = "ERROR: No response"
             retry = 10  
-            random.shuffle(label_map)  # Shuffle labels for each image
             while retry > 0:
                 try:
-                    response = model.generate_content([f'You are a plant disease expert. Diagnose this plant and respond only with the exact category name from the list below: {labels}', image])
+                    response = model.generate_content([f'You are a plant disease expert. Diagnose this plant and respond only with the exact category name from the list below: {list(shuffled_map.items())}. Answer with the numbers corresponding to the labels', image])
                     predicted_text = response.text.strip()
                     break
                 except ResourceExhausted as e:
