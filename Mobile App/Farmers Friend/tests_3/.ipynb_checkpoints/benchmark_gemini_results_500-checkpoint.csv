@@ -1,0 +1,501 @@
+True Label,Filename,Gemini Prediction
+Apple___alternaria_leaf_spot,112927.jpg,Spider mites
+Apple___alternaria_leaf_spot,112928.jpg,Apple rust
+Apple___alternaria_leaf_spot,112931.jpg,Leaf spot disease
+Apple___alternaria_leaf_spot,112934.jpg,Cedar-apple rust
+Apple___alternaria_leaf_spot,112935.jpg,healthy
+Apple___alternaria_leaf_spot,112937.jpg,Cedar-apple rust
+Apple___alternaria_leaf_spot,112938.jpg,Cedar-apple rust
+Apple___alternaria_leaf_spot,112942.jpg,healthy
+Apple___alternaria_leaf_spot,112947.jpg,Apple Blotch
+Apple___alternaria_leaf_spot,112948.jpg,Apple rust
+Apple___alternaria_leaf_spot,112949.jpg,Spider mites
+Apple___alternaria_leaf_spot,112953.jpg,Cedar apple rust
+Apple___alternaria_leaf_spot,112956.jpg,Apple scab
+Apple___alternaria_leaf_spot,112959.jpg,Apple scab
+Apple___alternaria_leaf_spot,112980.jpg,Apple scab
+Apple___alternaria_leaf_spot,112987.jpg,Apple scab
+Apple___alternaria_leaf_spot,112995.jpg,Apple scab
+Apple___alternaria_leaf_spot,112997.jpg,Leaf spot disease.
+Apple___alternaria_leaf_spot,113004.jpg,Apple scab
+Apple___alternaria_leaf_spot,113014.jpg,Gymnosporangium juniper-virginianae (Cedar-Apple Rust)
+Apple___alternaria_leaf_spot,113015.jpg,Gymnosporangium Rust
+Apple___alternaria_leaf_spot,113023.jpg,Apple Blotch
+Apple___alternaria_leaf_spot,113029.jpg,Leaf spot
+Apple___alternaria_leaf_spot,113034.jpg,Apple scab
+Apple___alternaria_leaf_spot,113035.jpg,Apple scab
+Apple___alternaria_leaf_spot,113037.jpg,Apple scab
+Apple___alternaria_leaf_spot,113040.jpg,Spider mites
+Apple___alternaria_leaf_spot,113042.jpg,Apple scab
+Apple___alternaria_leaf_spot,113043.jpg,Apple scab
+Apple___alternaria_leaf_spot,113050.jpg,Powdery mildew
+Apple___alternaria_leaf_spot,113053.jpg,Apple scab
+Apple___alternaria_leaf_spot,113062.jpg,Apple scab
+Apple___alternaria_leaf_spot,113066.jpg,Apple scab
+Apple___alternaria_leaf_spot,113070.jpg,Apple rust
+Apple___alternaria_leaf_spot,113072.jpg,Apple scab
+Apple___alternaria_leaf_spot,113073.jpg,Apple rust
+Apple___alternaria_leaf_spot,113085.jpg,Powdery mildew
+Apple___alternaria_leaf_spot,113089.jpg,Apple Rust
+Apple___alternaria_leaf_spot,113091.jpg,Apple rust
+Apple___alternaria_leaf_spot,113094.jpg,Apple scab
+Apple___alternaria_leaf_spot,113095.jpg,Apple rust
+Apple___alternaria_leaf_spot,113097.jpg,Leaf spot
+Apple___alternaria_leaf_spot,113102.jpg,Spider mites
+Apple___alternaria_leaf_spot,113103.jpg,Apple scab
+Apple___alternaria_leaf_spot,113107.jpg,Apple scab
+Apple___alternaria_leaf_spot,113112.jpg,Apple scab
+Apple___alternaria_leaf_spot,113118.jpg,Apple mosaic virus
+Apple___alternaria_leaf_spot,113121.jpg,Cedar apple rust
+Apple___alternaria_leaf_spot,113122.jpg,Apple scab
+Apple___alternaria_leaf_spot,113125.jpg,Powdery mildew
+Apple___alternaria_leaf_spot,113129.jpg,Apple scab
+Apple___alternaria_leaf_spot,113135.jpg,Apple Blotch
+Apple___alternaria_leaf_spot,113136.jpg,Apple scab
+Apple___alternaria_leaf_spot,113138.jpg,Cedar-apple rust
+Apple___alternaria_leaf_spot,113139.jpg,Powdery mildew
+Apple___alternaria_leaf_spot,113150.jpg,healthy
+Apple___alternaria_leaf_spot,113151.jpg,Powdery mildew
+Apple___alternaria_leaf_spot,113154.jpg,Cedar apple rust
+Apple___alternaria_leaf_spot,113162.jpg,Cedar apple rust
+Apple___alternaria_leaf_spot,113163.jpg,Apple scab
+Apple___alternaria_leaf_spot,113174.jpg,Powdery mildew
+Apple___alternaria_leaf_spot,113175.jpg,Apple scab
+Apple___alternaria_leaf_spot,113176.jpg,Apple scab
+Apple___alternaria_leaf_spot,113180.jpg,Apple scab
+Apple___alternaria_leaf_spot,113181.jpg,healthy
+Apple___alternaria_leaf_spot,113186.jpg,Apple rust
+Apple___alternaria_leaf_spot,113189.jpg,Apple rust mite damage
+Apple___alternaria_leaf_spot,113193.jpg,Apple rust
+Apple___alternaria_leaf_spot,113196.jpg,Apple scab
+Apple___alternaria_leaf_spot,113197.jpg,Apple scab
+Apple___black_rot,42871.jpg,Apple scab
+Apple___black_rot,42887.jpg,Apple Scab
+Apple___black_rot,42892.jpg,Apple scab
+Apple___black_rot,42903.jpg,Shot hole disease
+Apple___black_rot,42906.jpg,Powdery Mildew
+Apple___black_rot,42908.jpg,Apple scab
+Apple___black_rot,42914.jpg,Apple scab
+Apple___black_rot,42919.jpg,healthy
+Apple___black_rot,42925.jpg,Apple scab
+Apple___black_rot,42929.jpg,Apple scab
+Apple___black_rot,42930.jpg,Apple scab
+Apple___black_rot,42931.jpg,Shot hole disease
+Apple___black_rot,42935.jpg,Apple scab
+Apple___black_rot,42945.jpg,Apple scab
+Apple___black_rot,42948.jpg,Apple scab
+Apple___black_rot,42949.jpg,Apple scab
+Apple___black_rot,42962.jpg,Leaf spot
+Apple___black_rot,42968.jpg,Apple scab
+Apple___black_rot,42974.jpg,Leaf spot
+Apple___black_rot,42980.jpg,Apple scab
+Apple___black_rot,42991.jpg,healthy
+Apple___black_rot,43000.jpg,Apple scab
+Apple___black_rot,43003.jpg,Leaf spot
+Apple___black_rot,43020.jpg,Shot hole disease
+Apple___black_rot,43038.jpg,Leaf spot
+Apple___black_rot,43043.jpg,Apple scab
+Apple___black_rot,43052.jpg,Apple scab
+Apple___black_rot,43067.jpg,Apple scab
+Apple___black_rot,43071.jpg,Leaf scorch
+Apple___black_rot,43088.jpg,Apple leaf scorch
+Apple___black_rot,43110.jpg,Plum leaf curl aphids
+Apple___black_rot,43138.jpg,Apple scab
+Apple___black_rot,43152.jpg,Apple scab
+Apple___black_rot,43175.jpg,Apple scab
+Apple___black_rot,43189.jpg,Apple scab
+Apple___black_rot,43213.jpg,Apple scab
+Apple___black_rot,43216.jpg,Apple scab
+Apple___black_rot,43241.jpg,Apple scab
+Apple___black_rot,43245.jpg,Apple scab
+Apple___black_rot,43249.jpg,Apple scab
+Apple___black_rot,43256.jpg,Apple scab
+Apple___black_rot,43276.jpg,Apple scab
+Apple___black_rot,43277.jpg,Apple scab
+Apple___black_rot,43283.jpg,Leaf Spot
+Apple___black_rot,43286.jpg,Apple scab
+Apple___black_rot,43296.jpg,Apple scab
+Apple___black_rot,43298.jpg,healthy
+Apple___black_rot,43308.jpg,Apple scab
+Apple___black_rot,43315.jpg,Leaf scorch
+Apple___black_rot,43344.jpg,healthy
+Apple___black_rot,43345.jpg,Apple scab
+Apple___black_rot,43352.jpg,Anthracnose
+Apple___black_rot,43357.jpg,Apple scab
+Apple___black_rot,43373.jpg,Leaf scorch
+Apple___black_rot,43374.jpg,Powdery mildew
+Apple___black_rot,43388.jpg,Powdery mildew
+Apple___black_rot,43389.jpg,Leaf scorch
+Apple___black_rot,43402.jpg,Pear leaf spot
+Apple___black_rot,43414.jpg,Apple scab
+Apple___black_rot,43418.jpg,Apple scab
+Apple___black_rot,43420.jpg,Apple scab
+Apple___black_rot,43426.jpg,Apple scab
+Apple___black_rot,43427.jpg,Apple scab
+Apple___black_rot,43440.jpg,Apple scab
+Apple___black_rot,43457.jpg,healthy
+Apple___black_rot,43460.jpg,Apple Scab
+Apple___black_rot,43464.jpg,Apple scab
+Apple___black_rot,43465.jpg,Apple scab
+Apple___black_rot,43476.jpg,Anthracnose
+Apple___black_rot,43488.jpg,Apple scab
+Apple___brown_spot,113204.jpg,Pear leaf spot
+Apple___brown_spot,113205.jpg,Anthracnose
+Apple___brown_spot,113208.jpg,Apple scab
+Apple___brown_spot,113212.jpg,Anthracnose
+Apple___brown_spot,113213.jpg,Apple scab
+Apple___brown_spot,113215.jpg,Apple scab
+Apple___brown_spot,113221.jpg,Leaf spot disease
+Apple___brown_spot,113223.jpg,Apple scab
+Apple___brown_spot,113226.jpg,Leaf spot disease
+Apple___brown_spot,113230.jpg,Leaf spot disease
+Apple___brown_spot,113233.jpg,Apple scab
+Apple___brown_spot,113235.jpg,Apple scab
+Apple___brown_spot,113237.jpg,Apple scab
+Apple___brown_spot,113239.jpg,Leaf spot
+Apple___brown_spot,113242.jpg,Pear leaf spot
+Apple___brown_spot,113247.jpg,Apple scab
+Apple___brown_spot,113249.jpg,Black spot
+Apple___brown_spot,113251.jpg,Apple scab
+Apple___brown_spot,113253.jpg,Apple scab
+Apple___brown_spot,113258.jpg,Apple scab
+Apple___brown_spot,113262.jpg,Pear Leaf Spot
+Apple___brown_spot,113267.jpg,Apple scab
+Apple___brown_spot,113269.jpg,Leaf spot disease
+Apple___brown_spot,113271.jpg,Anthracnose
+Apple___brown_spot,113277.jpg,Leaf spot disease
+Apple___brown_spot,113278.jpg,Apple scab
+Apple___brown_spot,113283.jpg,Anthracnose
+Apple___brown_spot,113284.jpg,Apple scab
+Apple___brown_spot,113286.jpg,Leaf spot
+Apple___brown_spot,113291.jpg,Leaf spot disease
+Apple___brown_spot,113297.jpg,Anthracnose
+Apple___brown_spot,113299.jpg,Leaf spot disease
+Apple___brown_spot,113305.jpg,Apple scab
+Apple___brown_spot,113306.jpg,Leaf spot disease
+Apple___brown_spot,113313.jpg,Apple scab
+Apple___brown_spot,113315.jpg,Apple scab
+Apple___brown_spot,113317.jpg,Leaf spot disease
+Apple___brown_spot,113318.jpg,Black spot
+Apple___brown_spot,113322.jpg,Pear scab
+Apple___brown_spot,113330.jpg,Apple scab
+Apple___brown_spot,113331.jpg,Pear Scab
+Apple___brown_spot,113334.jpg,Apple scab
+Apple___brown_spot,113335.jpg,Apple scab
+Apple___brown_spot,113336.jpg,Leaf spot disease
+Apple___brown_spot,113338.jpg,Anthracnose
+Apple___brown_spot,113341.jpg,Leaf spot disease
+Apple___brown_spot,113343.jpg,Leaf spot disease
+Apple___brown_spot,113348.jpg,Leaf spot disease
+Apple___brown_spot,113349.jpg,Apple scab
+Apple___brown_spot,113359.jpg,Apple Scab
+Apple___brown_spot,113361.jpg,Apple scab
+Apple___brown_spot,113362.jpg,Iron deficiency (Chlorosis)
+Apple___brown_spot,113369.jpg,Apple scab
+Apple___brown_spot,113370.jpg,Apple scab
+Apple___brown_spot,113371.jpg,Anthracnose
+Apple___brown_spot,113373.jpg,Apple scab
+Apple___brown_spot,113374.jpg,Apple Scab
+Apple___brown_spot,113379.jpg,Apple scab
+Apple___brown_spot,113381.jpg,Leaf spot disease
+Apple___brown_spot,113386.jpg,Apple scab
+Apple___brown_spot,113387.jpg,Apple Scab
+Apple___brown_spot,113392.jpg,Leaf spot disease
+Apple___brown_spot,113395.jpg,Black spot
+Apple___brown_spot,113396.jpg,Leaf spot disease
+Apple___brown_spot,113400.jpg,Apple scab
+Apple___brown_spot,113403.jpg,Apple scab
+Apple___brown_spot,113405.jpg,Apple scab
+Apple___brown_spot,113406.jpg,Apple scab
+Apple___brown_spot,113409.jpg,Apple scab
+Apple___brown_spot,113410.jpg,Leaf spot disease
+Apple___gray_spot,113417.jpg,healthy
+Apple___gray_spot,113431.jpg,Apple scab
+Apple___gray_spot,113436.jpg,healthy
+Apple___gray_spot,113438.jpg,Apple scab
+Apple___gray_spot,113440.jpg,Apple scab
+Apple___gray_spot,113446.jpg,Apple scab
+Apple___gray_spot,113451.jpg,Apple scab
+Apple___gray_spot,113455.jpg,Apple scab
+Apple___gray_spot,113460.jpg,Apple scab
+Apple___gray_spot,113468.jpg,healthy
+Apple___gray_spot,113477.jpg,Apple scab
+Apple___gray_spot,113499.jpg,Apple scab
+Apple___gray_spot,113509.jpg,Leaf spot
+Apple___gray_spot,113510.jpg,Shot hole disease
+Apple___gray_spot,113514.jpg,Leaf spot disease
+Apple___gray_spot,113522.jpg,Apple scab
+Apple___gray_spot,113526.jpg,Powdery mildew
+Apple___gray_spot,113528.jpg,Apple scab
+Apple___gray_spot,113543.jpg,Apple scab
+Apple___gray_spot,113548.jpg,healthy
+Apple___gray_spot,113549.jpg,Apple scab
+Apple___gray_spot,113552.jpg,healthy
+Apple___gray_spot,113568.jpg,Apple scab
+Apple___gray_spot,113576.jpg,healthy
+Apple___gray_spot,113578.jpg,Apple scab
+Apple___gray_spot,113579.jpg,Apple scab
+Apple___gray_spot,113580.jpg,Apple scab
+Apple___gray_spot,113583.jpg,Apple scab
+Apple___gray_spot,113585.jpg,Apple scab
+Apple___gray_spot,113589.jpg,healthy
+Apple___gray_spot,113590.jpg,Apple scab
+Apple___gray_spot,113596.jpg,Apple scab
+Apple___gray_spot,113597.jpg,Apple rust
+Apple___gray_spot,113619.jpg,Apple scab
+Apple___gray_spot,113621.jpg,Apple scab
+Apple___gray_spot,113624.jpg,Apple scab
+Apple___gray_spot,113626.jpg,Leaf spot
+Apple___gray_spot,113637.jpg,Apple scab
+Apple___gray_spot,113639.jpg,Apple scab
+Apple___gray_spot,113646.jpg,Apple scab
+Apple___gray_spot,113647.jpg,Apple scab
+Apple___gray_spot,113652.jpg,Apple scab
+Apple___gray_spot,113659.jpg,healthy
+Apple___gray_spot,113663.jpg,Shot hole disease
+Apple___gray_spot,113665.jpg,Shot hole disease
+Apple___gray_spot,113667.jpg,Apple scab
+Apple___gray_spot,113675.jpg,healthy
+Apple___gray_spot,113681.jpg,Apple scab
+Apple___gray_spot,113682.jpg,Apple scab
+Apple___gray_spot,113683.jpg,Apple scab
+Apple___gray_spot,113695.jpg,Apple scab
+Apple___gray_spot,113703.jpg,Apple scab
+Apple___gray_spot,113707.jpg,Apple scab
+Apple___gray_spot,113717.jpg,healthy
+Apple___gray_spot,113721.jpg,Apple scab
+Apple___gray_spot,113739.jpg,healthy
+Apple___gray_spot,113742.jpg,healthy
+Apple___gray_spot,113748.jpg,healthy
+Apple___gray_spot,113757.jpg,Powdery mildew
+Apple___gray_spot,113760.jpg,Leaf miners
+Apple___gray_spot,113768.jpg,Apple scab
+Apple___gray_spot,113778.jpg,Leaf spot
+Apple___gray_spot,113784.jpg,Apple scab
+Apple___gray_spot,113785.jpg,Apple scab
+Apple___gray_spot,113788.jpg,Apple scab
+Apple___gray_spot,113790.jpg,healthy
+Apple___gray_spot,113791.jpg,Apple scab
+Apple___gray_spot,113798.jpg,Apple scab
+Apple___gray_spot,113803.jpg,Apple Scab
+Apple___gray_spot,113808.jpg,Apple scab
+Apple___healthy,100690.jpg,Leaf curl
+Apple___healthy,100755.jpg,healthy
+Apple___healthy,100771.jpg,healthy
+Apple___healthy,100801.jpg,healthy
+Apple___healthy,100834.jpg,healthy
+Apple___healthy,100858.jpg,healthy
+Apple___healthy,100871.jpg,healthy
+Apple___healthy,100970.jpg,healthy
+Apple___healthy,101006.jpg,healthy
+Apple___healthy,101015.jpg,healthy
+Apple___healthy,101016.jpg,healthy
+Apple___healthy,101019.jpg,healthy
+Apple___healthy,101048.jpg,healthy
+Apple___healthy,101088.jpg,healthy
+Apple___healthy,101108.jpg,healthy
+Apple___healthy,101124.jpg,healthy
+Apple___healthy,113832.jpg,Powdery mildew
+Apple___healthy,113843.jpg,Sooty Blotch
+Apple___healthy,114020.jpg,healthy
+Apple___healthy,114045.jpg,Apple scab
+Apple___healthy,114051.jpg,healthy
+Apple___healthy,114099.jpg,healthy
+Apple___healthy,114151.jpg,healthy
+Apple___healthy,114200.jpg,Powdery mildew
+Apple___healthy,43784.jpg,healthy
+Apple___healthy,43789.jpg,healthy
+Apple___healthy,43808.jpg,healthy
+Apple___healthy,43819.jpg,healthy
+Apple___healthy,43839.jpg,healthy
+Apple___healthy,43868.jpg,healthy
+Apple___healthy,43880.jpg,healthy
+Apple___healthy,43946.jpg,healthy
+Apple___healthy,44062.jpg,healthy
+Apple___healthy,44104.jpg,healthy
+Apple___healthy,44114.jpg,healthy
+Apple___healthy,44207.jpg,healthy
+Apple___healthy,44291.jpg,healthy
+Apple___healthy,44293.jpg,healthy
+Apple___healthy,44375.jpg,healthy
+Apple___healthy,44401.jpg,healthy
+Apple___healthy,44407.jpg,healthy
+Apple___healthy,44427.jpg,healthy
+Apple___healthy,44683.jpg,healthy
+Apple___healthy,44756.jpg,healthy
+Apple___healthy,44802.jpg,healthy
+Apple___healthy,44820.jpg,healthy
+Apple___healthy,44829.jpg,healthy
+Apple___healthy,44899.jpg,healthy
+Apple___healthy,44903.jpg,healthy
+Apple___healthy,44935.jpg,healthy
+Apple___healthy,44959.jpg,healthy
+Apple___healthy,45031.jpg,healthy
+Apple___healthy,45056.jpg,healthy
+Apple___healthy,45086.jpg,healthy
+Apple___healthy,45107.jpg,healthy
+Apple___healthy,45108.jpg,healthy
+Apple___healthy,45120.jpg,Powdery mildew
+Apple___healthy,45152.jpg,healthy
+Apple___healthy,45196.jpg,healthy
+Apple___healthy,45208.jpg,healthy
+Apple___healthy,45224.jpg,healthy
+Apple___healthy,45226.jpg,healthy
+Apple___healthy,45265.jpg,healthy
+Apple___healthy,45268.jpg,healthy
+Apple___healthy,45269.jpg,healthy
+Apple___healthy,45284.jpg,healthy
+Apple___healthy,45286.jpg,healthy
+Apple___healthy,45329.jpg,healthy
+Apple___healthy,45340.jpg,healthy
+Apple___healthy,45396.jpg,healthy
+Apple___rust,101137.jpg,Apple scab
+Apple___rust,101170.jpg,Cedar-apple rust
+Apple___rust,101174.jpg,Apple rust
+Apple___rust,101176.jpg,Apple rust
+Apple___rust,101192.jpg,Apple rust
+Apple___rust,101207.jpg,Cedar-apple rust
+Apple___rust,101210.jpg,Rust
+Apple___rust,101224.jpg,Apple rust
+Apple___rust,101227.jpg,Cedar-apple rust
+Apple___rust,101266.jpg,Apple scab
+Apple___rust,101270.jpg,Cedar-apple rust
+Apple___rust,101280.jpg,Cedar-apple rust
+Apple___rust,101336.jpg,Apple rust
+Apple___rust,101366.jpg,Apple rust
+Apple___rust,101416.jpg,Apple scab
+Apple___rust,101419.jpg,Apple rust
+Apple___rust,101458.jpg,Apple scab
+Apple___rust,101470.jpg,Cedar-apple rust
+Apple___rust,101492.jpg,Apple scab
+Apple___rust,101504.jpg,Cedar-apple rust
+Apple___rust,101522.jpg,Cedar-apple rust
+Apple___rust,101538.jpg,Cedar-apple rust
+Apple___rust,101540.jpg,Cedar-apple rust
+Apple___rust,101542.jpg,Apple scab
+Apple___rust,101544.jpg,Cedar-apple rust
+Apple___rust,101577.jpg,Apple rust
+Apple___rust,101589.jpg,Cedar-apple rust
+Apple___rust,101598.jpg,Cedar-apple rust
+Apple___rust,101614.jpg,Cedar apple rust
+Apple___rust,101663.jpg,Apple rust
+Apple___rust,101677.jpg,Apple rust
+Apple___rust,101682.jpg,Cedar-apple rust
+Apple___rust,101688.jpg,Apple rust
+Apple___rust,101699.jpg,Apple rust
+Apple___rust,101710.jpg,Apple rust
+Apple___rust,114244.jpg,Frog eye leaf spot
+Apple___rust,114262.jpg,Apple leaf spot
+Apple___rust,114267.jpg,Apple scab
+Apple___rust,114274.jpg,Apple scab
+Apple___rust,114316.jpg,Cherry leaf spot
+Apple___rust,114391.jpg,Apple rust
+Apple___rust,114413.jpg,Apple scab
+Apple___rust,114429.jpg,Apple scab
+Apple___rust,114435.jpg,Apple scab
+Apple___rust,114446.jpg,Frog eye leaf spot
+Apple___rust,114452.jpg,Apple scab
+Apple___rust,114468.jpg,Leaf spot disease
+Apple___rust,114481.jpg,Apple scab
+Apple___rust,114486.jpg,Apple Scab
+Apple___rust,114487.jpg,Apple scab
+Apple___rust,114514.jpg,Apple Scab
+Apple___rust,114524.jpg,Apple leaf spot
+Apple___rust,114541.jpg,Leaf spot disease
+Apple___rust,43509.jpg,Apple scab
+Apple___rust,43537.jpg,Apple scab
+Apple___rust,43579.jpg,Apple scab
+Apple___rust,43581.jpg,Apple scab
+Apple___rust,43588.jpg,Apple scab
+Apple___rust,43624.jpg,Apple scab
+Apple___rust,43645.jpg,Apple Scab
+Apple___rust,43666.jpg,Apple Scab
+Apple___rust,43672.jpg,Apple scab
+Apple___rust,43674.jpg,Apple scab
+Apple___rust,43686.jpg,Apple scab
+Apple___rust,43700.jpg,Apple scab
+Apple___rust,43702.jpg,Apple rust
+Apple___rust,43729.jpg,Apple scab
+Apple___rust,43731.jpg,Apple scab
+Apple___rust,43750.jpg,Apple scab
+Apple___rust,43762.jpg,Apple Scab
+Apple___scab,101761.jpg,Apple scab
+Apple___scab,101779.jpg,Apple scab
+Apple___scab,101800.jpg,Apple scab
+Apple___scab,101809.jpg,Shot hole disease
+Apple___scab,101818.jpg,Apple scab
+Apple___scab,101846.jpg,Leaf spot
+Apple___scab,101848.jpg,Apple mosaic virus
+Apple___scab,101861.jpg,Apple scab
+Apple___scab,101872.jpg,Apple scab
+Apple___scab,101875.jpg,Apple Scab
+Apple___scab,101876.jpg,Apple Scab
+Apple___scab,101885.jpg,Apple scab
+Apple___scab,101922.jpg,Apple scab
+Apple___scab,102005.jpg,Anthracnose
+Apple___scab,102023.jpg,Apple scab
+Apple___scab,102026.jpg,Apple scab
+Apple___scab,102037.jpg,Apple scab
+Apple___scab,102050.jpg,Leaf spot disease
+Apple___scab,102074.jpg,Septoria leaf spot
+Apple___scab,102093.jpg,Apple scab
+Apple___scab,102113.jpg,Apple scab
+Apple___scab,102137.jpg,Apple leaf spot
+Apple___scab,102158.jpg,Apple scab
+Apple___scab,102179.jpg,Apple scab
+Apple___scab,102238.jpg,Apple scab
+Apple___scab,102255.jpg,Apple scab
+Apple___scab,102259.jpg,Apple scab
+Apple___scab,102278.jpg,Apple mosaic virus
+Apple___scab,102291.jpg,Apple scab
+Apple___scab,102295.jpg,Apple rust
+Apple___scab,102301.jpg,Aphids
+Apple___scab,102308.jpg,Apple Scab
+Apple___scab,102314.jpg,Apple Scab
+Apple___scab,102318.jpg,Apple Scab
+Apple___scab,102342.jpg,Apple scab
+Apple___scab,42246.jpg,Apple scab
+Apple___scab,42253.jpg,Apple scab
+Apple___scab,42283.jpg,Apple scab
+Apple___scab,42285.jpg,Apple scab
+Apple___scab,42303.jpg,Apple scab
+Apple___scab,42314.jpg,Apple scab
+Apple___scab,42331.jpg,Apple Scab
+Apple___scab,42337.jpg,Algal leaf spot
+Apple___scab,42343.jpg,Plum leaf spot
+Apple___scab,42349.jpg,Apple scab
+Apple___scab,42351.jpg,Apple scab
+Apple___scab,42365.jpg,Apple scab
+Apple___scab,42370.jpg,Apple scab
+Apple___scab,42397.jpg,Sooty mold
+Apple___scab,42442.jpg,Apple scab
+Apple___scab,42462.jpg,Apple scab
+Apple___scab,42499.jpg,Apple scab
+Apple___scab,42527.jpg,Apple Scab
+Apple___scab,42536.jpg,Apple scab
+Apple___scab,42559.jpg,Apple scab
+Apple___scab,42579.jpg,Apple scab
+Apple___scab,42582.jpg,Apple scab
+Apple___scab,42605.jpg,Apple Scab
+Apple___scab,42644.jpg,Apple scab
+Apple___scab,42662.jpg,Apple scab
+Apple___scab,42675.jpg,Apple scab
+Apple___scab,42680.jpg,Apple scab
+Apple___scab,42690.jpg,Apple scab
+Apple___scab,42746.jpg,Apple scab
+Apple___scab,42750.jpg,Apple scab
+Apple___scab,42792.jpg,Apple scab
+Apple___scab,42798.jpg,Apple scab
+Apple___scab,42809.jpg,Apple scab
+Apple___scab,42860.jpg,Apple scab
+Apple___scab,42864.jpg,Apple scab
+Bell_pepper___bacterial_spot,64909.jpg,Leaf spot disease
+Bell_pepper___bacterial_spot,64924.jpg,Anthracnose
+Bell_pepper___bacterial_spot,64936.jpg,Bacterial leaf spot
+Bell_pepper___bacterial_spot,64943.jpg,Anthracnose
+Bell_pepper___bacterial_spot,64956.jpg,Bacterial leaf spot
+Bell_pepper___bacterial_spot,64972.jpg,Early blight
+Bell_pepper___bacterial_spot,64979.jpg,Alternaria leaf spot
+Bell_pepper___bacterial_spot,64986.jpg,Nutrient deficiency.
+Bell_pepper___bacterial_spot,65011.jpg,Anthracnose
+Bell_pepper___bacterial_spot,65030.jpg,Bacterial leaf spot

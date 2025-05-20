@@ -355,9 +355,3 @@ async function uriToBase64(fileURI) {
   }
   return data;
 }
-
-const styles = StyleSheet.create({
-  modelOption: {
-    margin: 10,
-  },
-});

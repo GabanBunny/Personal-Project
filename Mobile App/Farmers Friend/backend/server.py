@@ -1,37 +1,33 @@
-from flask import Flask, jsonify, request
-import moondream as md
-from PIL import Image
-from tempfile import NamedTemporaryFile
-import base64
-
-
+from flask import Flask,request,jsonify
+import AI_Models.ImageDetection.MobileNetV2FineTuned
+import AI_Models.ChatFeature.TinyLlama
+from flask_cors import CORS
 app = Flask(__name__)
+CORS(app, resources={r"/api-MobileNetV2": {"origins": "*"}})
 
-model = md.vl(model="C:\\Users\\phuct\\Downloads\\Project\\Personal-Project\\Mobile App\\Farmers Friend\\backend\\moondream-0_5b-int8.mf.gz")
-@app.route('/api-ollama', methods = ['POST'])
-def getImage():
-    try:
-        data = request.json
-        image_path = data.get("base64Image")
-        imgdata = base64.b64decode(image_path)
-        filename ="tmp.jpg"
-        with open(filename,'wb') as f:
-            f.write(imgdata)
-            
-        image = Image.open(filename)
-        encoded_image = model.encode_image(image)
-        
-        caption = model.caption(encoded_image)["caption"]
-        # print("Caption:", caption)
-        
-        ans = model.query(
-    encoded_image, "What is the disease of this plant? How to treat the disease?")["answer"]
+@app.route('/api-MobileNetV2', methods=['POST'])
+def getPrediction():
+    data = request.json
+    base64Image = data.get("base64Image")
+    diseaseName = AI_Models.ImageDetection.MobileNetV2FineTuned.predict(base64Image)
+    # description = AI_Models.ChatFeature.TinyLlama.generate(diseaseName['class'],40,"description")
+    # biological = AI_Models.ChatFeature.TinyLlama.generate(diseaseName['class'],10,"biological treatment")
+    # chemical = AI_Models.ChatFeature.TinyLlama.generate(diseaseName['class'],10,"chemical treatment")
+    # prevention = AI_Models.ChatFeature.TinyLlama.generate(diseaseName['class'],10,"prevention treatment")
+
+    response = {
+    "plantName": diseaseName['class'].split("___")[0],
+    "disease": diseaseName['class'].split("___")[1],
+    # "All": diseaseName['class']
+    # "description": description,
+    # "biological_treatment": biological,
+    # "chemical_treatment": chemical,
+    # "prevention": prevention
+    } 
+    print("Raw data received:", diseaseName['class'].split("___"))    
+    return jsonify(response), 200
 
 
-        return jsonify({"ans": ans}),200
-    except Exception as e:
-        return jsonify({"error": str(e)}),400
-
+    
 if __name__ == "__main__":
-    # host 0.0.0.0 to run on all port
-    app.run(debug = True,host= "0.0.0.0",port = 5000)
+    app.run(debug=True, host="0.0.0.0", port=5001)

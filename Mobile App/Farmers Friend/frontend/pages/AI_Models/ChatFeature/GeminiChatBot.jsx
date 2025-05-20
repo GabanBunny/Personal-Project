@@ -9,19 +9,22 @@ export const GeminiChatBot = async ({
   isPlantIDv3Input,
   sentMessage,
   selectedModel,
+  mobileNetV2,
+  parameter,
 }) => {
-  let model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  let model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
   if (selectedModel) {
     selectedModel = selectedModel.toLowerCase().replaceAll(" ", "-");
     model = genAI.getGenerativeModel({ model: selectedModel });
   }
-  console.log("getting chatbot answer ", selectedModel);
+
   // Check which type of object is this
   const audio = result.hasOwnProperty("file");
   const photo = result.hasOwnProperty("width");
 
   // Get past 10 response or all current response for muti round conversation
-  ObjectSentMessage = Object.values(sentMessage);
+  let lastUserResponse;
+  let ObjectSentMessage = sentMessage ? Object.values(sentMessage) : [];
   const limitResponse =
     ObjectSentMessage.length < 10 ? ObjectSentMessage.length : 10;
   let histories = [];
@@ -29,9 +32,10 @@ export const GeminiChatBot = async ({
     lastUserResponse = "audio taken from the user";
   }
 
-  for (i = 0; i < limitResponse * 2; i += 2) {
+  for (let i = 0; i < limitResponse * 2; i += 2) {
     lastUserResponse = ObjectSentMessage[ObjectSentMessage.length - 2 - i];
-    lastGeminiResponse = ObjectSentMessage[ObjectSentMessage.length - 1 - i];
+    let lastGeminiResponse =
+      ObjectSentMessage[ObjectSentMessage.length - 1 - i];
     // If response is an object, than check if it's photo or audio
     if (typeof lastUserResponse === "object") {
       if (photo) {
@@ -67,6 +71,17 @@ export const GeminiChatBot = async ({
     },
   };
 
+  if (mobileNetV2) {
+    const prompt = `Please keep your response under 10 words. You are a biologist with focus on plant disease detection, based on this ${result["disease"]} of this plant ${result["plantName"]}. We need to focus on providing the following information: ${parameter}
+    Remember to keep your response in under 10 words`;
+    try {
+      const response = await model.generateContent(prompt);
+      return response.response.text();
+    } catch (error) {
+      console.log("Error getting response from Gemini", error);
+    }
+  }
+
   if (isPlantIDv3Input) {
     const prompt = ` Please keep your response under 50 words. You are a biologist with focus on plant disease detection, based on this input. We need to focus on
     Disease: ${result.name},
@@ -83,7 +98,7 @@ export const GeminiChatBot = async ({
       console.log("Error getting response from Gemini", error);
     }
   } else {
-    // Send Gemini
+    // Send Gemini Chat
     try {
       if (!audio) {
         response = await chat.sendMessage(result);
@@ -97,7 +112,7 @@ export const GeminiChatBot = async ({
             },
           },
           {
-            text: "Response to the audio, keep it short and consise and response under 100 words",
+            text: "Response to the audio, keep it short and concise and response under 100 words",
           },
         ]);
       }

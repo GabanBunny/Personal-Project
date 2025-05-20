@@ -1,7 +1,7 @@
-import GPTImageDetection from "../AI_Models/ImageDetection/GPTImageDetection.jsx";
-import OllamaImageDetection from "../AI_Models/ImageDetection/OllamaImageDetection.jsx";
-import { PlantIDv3ImageDetection } from "../AI_Models/ImageDetection/PlantIDv3ImageDetection";
-import { GeminiChatBot } from "../AI_Models/ChatFeature/GeminiChatBot";
+// import GPTImageDetection from "../AI_Models/ImageDetection/GPTImageDetection.jsx";
+// import OllamaImageDetection from "../AI_Models/ImageDetection/OllamaImageDetection.jsx";
+// import { PlantIDv3ImageDetection } from "../AI_Models/ImageDetection/PlantIDv3ImageDetection";
+// import { GeminiChatBot } from "../AI_Models/ChatFeature/GeminiChatBot";
 import { CameraView, CameraType, useCameraPermissions } from "expo-camera";
 import { useState, useRef } from "react";
 import {
@@ -33,24 +33,45 @@ export default function Camera({
 }) {
   const [plantIDans, setPlantIDans] = useState(null);
   const [facing, setFacing] = useState("back");
-  const [permission, requestPermission] = useCameraPermissions();
   const [cameraState, setCameraState] = useState(false);
   const cameraRef = useRef(null);
   const [photo, setPhoto] = useState(null);
+  const [permission, requestPermission] = useCameraPermissions();
+
+  function denyPermission() {
+    requestPermission({ canAskAgain: false }); // Prevents asking again
+  }
 
   if (!permission) {
-    // Camera permissions are still loading.
     return <View />;
   }
 
   if (!permission.granted) {
-    // Camera permissions are not granted yet.
     return (
-      <View style={styles.container}>
-        <Text style={styles.message}>
-          We need your permission to show the camera
-        </Text>
-        <Button onPress={requestPermission} title="grant permission" />
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: "rgba(94, 84, 84, 0.7)",
+        }}
+      >
+        <View style={{ width: 200, backgroundColor: "white", padding: 10 }}>
+          <Text
+            style={{
+              textAlign: "center",
+              paddingBottom: 10,
+            }}
+          >
+            We need your permission to show the camera
+          </Text>
+          <Button onPress={requestPermission} title="Grant Permission" />
+          <Button
+            onPress={denyPermission}
+            title="Deny Permission"
+            color="red"
+          />
+        </View>
       </View>
     );
   }
@@ -71,7 +92,7 @@ export default function Camera({
         <CameraView
           style={{
             height: CropScreen ? height + 50 : height + 50,
-            top: CropScreen ? 0 : -20,
+            top: CropScreen ? -50 : -20,
           }}
           facing={facing}
           CameraType={CameraType}
@@ -257,7 +278,7 @@ export default function Camera({
         </CameraView>
       ) : // Open Camera for CropsScreen
       CropScreen ? (
-        <View style={styles.containerClose}>
+        <View style={{ top: 400 }}>
           <TouchableOpacity
             style={styles.openCameraButton}
             onPress={() => {
@@ -270,35 +291,40 @@ export default function Camera({
         </View>
       ) : (
         // Open Camera for chatbot screen
-        <TouchableOpacity
-          style={{ marginLeft: 10 }}
-          onPress={() => {
-            setHasCameraOpened(false); //hide the tab bar
-            Keyboard.dismiss(); //Hide the keyboard when open camera
-            setCameraState(true);
-            setIsPressed(true);
-          }}
-        >
-          <Svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
+        <View style={{ justifyContent: "center", alignItems: "center" }}>
+          <TouchableOpacity
+            style={{
+              marginLeft: 10,
+              justifyContent: "center",
+              alignItems: "center", // Center the content
+              height: 40, // Set explicit height
+            }}
+            onPress={() => {
+              setHasCameraOpened(false); //hide the tab bar
+              Keyboard.dismiss(); //Hide the keyboard when open camera
+              setCameraState(true);
+              setIsPressed(true);
+            }}
           >
-            <Path
-              fill={green}
-              d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2m8 3a5 5 0 0 0-5 5a5 5 0 0 0 5 5a5 5 0 0 0 5-5a5 5 0 0 0-5-5m0 2a3 3 0 0 1 3 3a3 3 0 0 1-3 3a3 3 0 0 1-3-3a3 3 0 0 1 3-3"
-            />
-          </Svg>
-        </TouchableOpacity>
+            <Svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+            >
+              <Path
+                fill={green}
+                d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2m8 3a5 5 0 0 0-5 5a5 5 0 0 0 5 5a5 5 0 0 0 5-5a5 5 0 0 0-5-5m0 2a3 3 0 0 1 3 3a3 3 0 0 1-3 3a3 3 0 0 1-3-3a3 3 0 0 1 3-3"
+              />
+            </Svg>
+          </TouchableOpacity>
+        </View>
       )}
     </View>
   );
 }
-// }
 
 const styles = StyleSheet.create({
-  containerClose: {},
   chatbotContainer: {
     position: "absolute",
     alignItems: "center",
@@ -312,14 +338,6 @@ const styles = StyleSheet.create({
     width: "310",
     flex: 1,
     alignItems: "center",
-  },
-  container: {
-    flex: 1,
-    justifyContent: "center",
-  },
-  message: {
-    textAlign: "center",
-    paddingBottom: 10,
   },
   buttonInsideContainer: {
     flex: 1,

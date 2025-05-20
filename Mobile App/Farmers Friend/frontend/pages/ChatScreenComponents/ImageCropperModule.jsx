@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { MobileNetV2ImageDetection } from "../AI_Models/ImageDetection/MobileNetV2";
 import { ImageEditor } from "expo-crop-image";
 import * as FileSystem from "expo-file-system";
 import { GeminiChatBot } from "../AI_Models/ChatFeature/GeminiChatBot";
@@ -37,11 +38,12 @@ export default function ImageCropperModule({
           photo,
           photoBase64
         );
-        setHasCameraOpened(false);
+        
 
         // Close camera and set is Pressed
         CropScreen ? null : setCameraState(false);
         CropScreen ? null : setIsPressed(false);
+        CropScreen ? setHasCameraOpened(false) : setHasCameraOpened(true);
       }}
     />
   );
@@ -68,9 +70,13 @@ async function sendPlantIDv3(
   photoBase64
 ) {
   console.log("getting response from plantID v3");
+  var result = await MobileNetV2ImageDetection({ base64Image: photoBase64 });
+  console.log(JSON.stringify(result, null, 2));
+
   // var result = await PlantIDv3ImageDetection({ base64Image: photoBase64 });
+  
   // Sample
-  var result = {
+  // result = {
     // Disease 1
     // details: {
     //   description:
@@ -107,20 +113,20 @@ async function sendPlantIDv3(
     // probability: 0.5544,
 
     // Disease 3s
-    details: {
-      description:
-        "Fungi take energy from the plants on which they live, causing damage to the plant. Fungal infections are responsible for approximately two-thirds of infectious plant diseases and cause wilting, molding, rusts, scabs, rotted tissue, and other problems.",
-      entity_id: "7f22438065988f95",
-      language: "en",
-      treatment: {
-        biological: ["biofungicides containing Bacillus subtilis"],
-        chemical: ["Use systemic fungicides like azoxystrobin or tebuconazole"],
-        prevention: ["Avoid overwatering, improve soil drainage"],
-      },
-    },
-    id: "7f22438065988f95",
-    name: "Fungi",
-    probability: 0.5162,
+    // details: {
+    //   description:
+    //     "Fungi take energy from the plants on which they live, causing damage to the plant. Fungal infections are responsible for approximately two-thirds of infectious plant diseases and cause wilting, molding, rusts, scabs, rotted tissue, and other problems.",
+    //   entity_id: "7f22438065988f95",
+    //   language: "en",
+    //   treatment: {
+    //     biological: ["biofungicides containing Bacillus subtilis"],
+    //     chemical: ["Use systemic fungicides like azoxystrobin or tebuconazole"],
+    //     prevention: ["Avoid overwatering, improve soil drainage"],
+    //   },
+    // },
+    // id: "7f22438065988f95",
+    // name: "Fungi",
+    // probability: 0.5162,
 
     // Disease 4
     // "details": {
@@ -131,9 +137,9 @@ async function sendPlantIDv3(
     // }"id": "03209d77216b14d8",
     // "name": "dead plant",
     // "probability": 0.0634,
-  };
+  // };
   setPlantIDans(result);
-  console.log(JSON.stringify(result, null, 2));
+  // console.log(JSON.stringify(result, null, 2));
   if (!CropScreen) {
     // Store photo base64 as a string (from user taking picture)
     setSentMessage((previousUserMessage) => [...previousUserMessage, photo]);

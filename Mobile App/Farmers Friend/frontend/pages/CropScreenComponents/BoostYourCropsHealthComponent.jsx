@@ -16,7 +16,7 @@ export const BoostYourCropsHealthComponents = () => {
             marginTop: 15,
             flexDirection: "row",
             justifyContent: "space-between",
-            width: "75%",
+            width: "100%",
           }}
         >
           {/* Components 1 */}
