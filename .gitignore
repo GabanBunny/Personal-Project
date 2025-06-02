@@ -1,12 +1,15 @@
-Mobile App/Farmers Friend/Project Demo.mp4
-Mobile App/Farmers Friend/docs
-Mobile App/Farmers Friend/tests_1
-Mobile App/Farmers Friend/tests_2
-Mobile App/Farmers Friend/tests_3
-Mobile App/Farmers Friend/benchmark_subset
+# Ignore specific folders under Farmers Friend
+/Mobile App/Farmers Friend/Project Demo.mp4
+/Mobile App/Farmers Friend/docs/
+/Mobile App/Farmers Friend/tests_1/
+/Mobile App/Farmers Friend/tests_2/
+/Mobile App/Farmers Friend/tests_3/
+/Mobile App/Farmers Friend/benchmark_subset/
 
+# Ignore files and folders in Web App
+/Web app/Minidet/Minidet Demo.mp4
+/Web app/Minidet/NOVICOM certificate/
+/Web app/FreeCodeCamp/
 
-Web App/Minidet Demo.mp4
-Web App/NOVICOM certificate
-Web App/FreeCodeCamp
+# Ignore aider metadata
 .aider*
