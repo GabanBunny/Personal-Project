@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Escape Room | Home</title>
+    <style>
+      :root {
+        --primary-color: #ff69b4;
+        --secondary-color: #ffb8d7;
+        --accent-color: #ff1493;
+        --text-color: #2d2d2d;
+        --box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      }
+
+      body {
+        margin: 0;
+        height: 100%;
+        background: linear-gradient(135deg, var(--secondary-color), #ffd3e6);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .container {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        padding: 2rem;
+        width: min(90%, 500px);
+        box-shadow: var(--box-shadow);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .container:hover {
+        transform: translateY(-5px);
+      }
+
+      .title {
+        font-size: 2.5rem;
+        text-align: center;
+        margin-bottom: 1rem;
+        background: linear-gradient(
+          45deg,
+          var(--primary-color),
+          var(--accent-color)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .subtitle {
+        text-align: center;
+        font-size: 1.1rem;
+        color: var(--text-color);
+        margin-bottom: 2rem;
+        line-height: 1.5;
+      }
+
+      .start-button {
+        display: block;
+        margin: 0 auto;
+        padding: 1rem 2rem;
+        font-size: 1.2rem;
+        background: linear-gradient(
+          45deg,
+          var(--primary-color),
+          var(--accent-color)
+        );
+        color: white;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        width: fit-content;
+        box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+      }
+
+      .start-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 20px rgba(255, 105, 180, 0.4);
+      }
+
+      .audio-iframe {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <iframe src="../adventure.mp3" class="audio-iframe"></iframe>
+    <div class="container">
+      <h1 class="title"><em>ESCAPE ROOM</em></h1>
+      <p class="subtitle">
+        <em
+          >You've received a mysterious love letter...<br />
+          But crucial pieces are missing.<br />
+          Can you solve the puzzles to reveal its secrets?</em
+        >
+      </p>
+
+      <a href="phases/phase1.html" class="start-button"> Begin Journey </a>
+    </div>
+  </body>
+</html>
